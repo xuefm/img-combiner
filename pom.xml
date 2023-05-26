@@ -11,6 +11,7 @@
     <properties>
         <java.version>17</java.version>
     </properties>
+
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -30,6 +31,7 @@
         </dependency>
     </dependencies>
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -42,6 +44,31 @@
             </plugin>
         </plugins>
     </build>
+    <!--协议-->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <!--作者信息-->
+    <developers>
+        <developer>
+            <name>xuefm</name>
+            <email>321766987@qq.com</email>
+            <organization>https://github.com/xuefm</organization>
+        </developer>
+    </developers>
+    <!--项目信息-->
+    <scm>
+        <connection>https://github.com/xuefm/img-combiner.git</connection>
+        <developerConnection>https://github.com/xuefm</developerConnection>
+        <url>https://github.com/xuefm/img-combiner.git</url>
+    </scm>
 
 
 </project>
+
+
+
