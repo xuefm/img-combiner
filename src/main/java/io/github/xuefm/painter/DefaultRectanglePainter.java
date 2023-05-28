@@ -10,6 +10,7 @@ import java.awt.*;
  * 默认矩形画家
  */
 public class DefaultRectanglePainter implements ILinePainter {
+
     @Override
     public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
         RectangleElement rectangleElement = (RectangleElement) element;

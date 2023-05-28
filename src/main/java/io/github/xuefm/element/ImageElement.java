@@ -17,18 +17,43 @@ import java.net.URL;
 @Accessors(chain = true)
 public class ImageElement extends Element {
 
-    private BufferedImage image;            //图片对象
-    private String imgUrl;                  //图片地址
-    private Integer width;                  //绘制宽度
-    private Integer height;                 //绘制高度
+    /**
+     * 图片对象
+     */
+    private BufferedImage image;
+
+    /**
+     * 图片地址
+     */
+    private String imgUrl;
+
+    /**
+     * 绘制宽度
+     */
+    private Integer width;
+
+    /**
+     * 绘制高度
+     */
+    private Integer height;
+
+    /**
+     * 圆角大小
+     */
     @Setter
-    private Integer roundCorner;            //圆角大小
+    private Integer roundCorner;
+
+    /**
+     * 缩放模式
+     */
     @Setter
-    private ZoomMode zoomMode;              //缩放模式
+    private ZoomMode zoomMode;
+
+    /**
+     * 旋转角度
+     */
     @Setter
-    private Integer rotate;                 //旋转角度
-    @Setter
-    private Integer blur;                   //高斯模糊（毛玻璃）
+    private Integer rotate;
 
 
     private ImageElement(String imgUrl, int x, int y) {

@@ -14,12 +14,8 @@ import java.io.IOException;
 
 public class ImgTest {
 
-    private String filePath = "file:///F:/IdeaProjects/dome/img-combiner/test_file/";
-    private String generateFilePath = "F:/IdeaProjects/dome/img-combiner/test_file/generate/";
-    private String generateImgPath = generateFilePath + "img/";
-    private String generateTextPath = generateFilePath + "text/";
-    private String generateRectanglePath = generateFilePath + "rectangle/";
-
+    private String filePath = "file:///"+System.getProperty("user.dir")+"/test_file/";
+    private String generateFilePath = System.getProperty("user.dir")+"/test_file/generate/";
 
     /**
      * 测试添加图片(指定位置)
@@ -31,7 +27,7 @@ public class ImgTest {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
         imageCombiner.addElement(ImageElement.of(filePath + "cat.jpg", 10, 10));
         imageCombiner.generate();
-        imageCombiner.save(generateImgPath + "指定位置.png");
+        imageCombiner.save(generateFilePath+"img"+ "指定位置.png");
     }
 
     /**
@@ -44,7 +40,7 @@ public class ImgTest {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
         imageCombiner.addElement(ImageElement.of(filePath + "cat.jpg", 10, 10, 150, 200));
         imageCombiner.generate();
-        imageCombiner.save(generateImgPath + "指定宽高.png");
+        imageCombiner.save(generateFilePath+"img"+ "指定宽高.png");
     }
 
     /**
@@ -60,7 +56,7 @@ public class ImgTest {
 
         );
         imageCombiner.generate();
-        imageCombiner.save(generateImgPath + "圆角.png");
+        imageCombiner.save(generateFilePath+"img"+ "圆角.png");
     }
 
     /**
@@ -76,7 +72,7 @@ public class ImgTest {
                         .setRotate(45)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateImgPath + "旋转.png");
+        imageCombiner.save(generateFilePath+"img"+ "旋转.png");
     }
 
     /**
@@ -92,7 +88,7 @@ public class ImgTest {
                         .setAlpha(0.5f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateImgPath + "透明.png");
+        imageCombiner.save(generateFilePath+"img"+ "透明.png");
     }
 
     /**
@@ -108,7 +104,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, 50)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateTextPath + "添加文本.png");
+        imageCombiner.save(generateFilePath+"text" + "添加文本.png");
     }
 
     /**
@@ -124,7 +120,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, 50).setColor(Color.yellow)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateTextPath + "颜色.png");
+        imageCombiner.save(generateFilePath+"text" + "颜色.png");
     }
 
 
@@ -144,7 +140,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, y += 72).setFont(new Font("宋体", Font.BOLD, 72))
         );
         imageCombiner.generate();
-        imageCombiner.save(generateTextPath + "字体.png");
+        imageCombiner.save(generateFilePath+"text" + "字体.png");
     }
 
 
@@ -164,7 +160,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, y += 72).setFont(new Font("宋体", Font.BOLD, 72)).setAlpha(0.2f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateTextPath + "文字透明.png");
+        imageCombiner.save(generateFilePath+"text" + "文字透明.png");
     }
 
     /**
@@ -180,7 +176,7 @@ public class ImgTest {
                 TextElement.of("Hello World", 0, 72).setFont(new Font("微软雅黑", Font.PLAIN, 36))
         );
         imageCombiner.generate();
-        imageCombiner.save(generateTextPath + "文字旋转.png");
+        imageCombiner.save(generateFilePath+"text" + "文字旋转.png");
     }
 
     /**
@@ -195,7 +191,7 @@ public class ImgTest {
                 RectangleElement.of(10, 10, 100, 100).setColor(Color.CYAN)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateRectanglePath + "矩形.png");
+        imageCombiner.save(generateFilePath+"rectangle" + "矩形.png");
     }
 
     /**
@@ -211,7 +207,7 @@ public class ImgTest {
                 RectangleElement.of(110, 10, 100, 100, RectangleType.FillRoundRect).setRoundCorner(100).setColor(Color.CYAN)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateRectanglePath + "矩形圆角.png");
+        imageCombiner.save(generateFilePath+"rectangle" + "矩形圆角.png");
     }
 
     /**
@@ -235,8 +231,10 @@ public class ImgTest {
 
         );
         imageCombiner.generate();
-        imageCombiner.save(generateRectanglePath + "矩形全部.png");
+        imageCombiner.save(generateFilePath+"rectangle" + "矩形全部.png");
     }
+
+
 
 
 }

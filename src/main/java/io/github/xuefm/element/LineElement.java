@@ -20,7 +20,10 @@ public class LineElement extends Element {
      */
     protected int y2;
 
-    private Color color = new Color(0, 0, 0);   //颜色，默认黑色
+    /**
+     * 颜色，默认黑色
+     */
+    private Color color = new Color(0, 0, 0);
 
 
     private LineElement(int x, int y, int x2, int y2) {

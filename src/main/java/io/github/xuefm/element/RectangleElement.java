@@ -14,23 +14,36 @@ import java.awt.*;
 @Getter
 @Accessors(chain = true)
 public class RectangleElement extends Element {
-    @Setter
-    private Integer width;                  //绘制宽度
 
+    /**
+     * 绘制宽度
+     */
     @Setter
-    private Integer height;                 //绘制高度
+    private Integer width;
 
+    /**
+     * 绘制高度
+     */
     @Setter
-    private Integer borderSize;             //边框大小
+    private Integer height;
 
+    /**
+     * 颜色，默认黑色
+     */
     @Setter
-    private Color color = new Color(255, 255, 255);   //颜色，默认白色
+    private Color color = new Color(0, 0, 0);
 
+    /**
+     * 默认矩形填充
+     */
     @Setter
-    private RectangleType rectangleType = RectangleType.FillRect; //默认矩形填充
+    private RectangleType rectangleType = RectangleType.FillRect;
 
+    /**
+     * 圆角大小 当为圆角矩形时生效
+     */
     @Setter
-    private Integer roundCorner = 0;            //圆角大小 当为圆角矩形时生效
+    private Integer roundCorner = 0;
 
     private RectangleElement(int x, int y, int width, int height) {
         super(x, y);

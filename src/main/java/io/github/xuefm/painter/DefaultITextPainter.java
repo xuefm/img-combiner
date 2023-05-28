@@ -11,6 +11,7 @@ import java.util.Objects;
  * 默认文本画家
  */
 public class DefaultITextPainter implements ITextPainter {
+
     @Override
     public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
         TextElement textElement = (TextElement) element;

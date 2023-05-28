@@ -10,6 +10,7 @@ import java.awt.*;
  * 默认线画家
  */
 public class DefaultLinePainter implements ILinePainter {
+
     @Override
     public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
         LineElement lineElement = (LineElement) element;

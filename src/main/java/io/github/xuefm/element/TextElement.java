@@ -13,17 +13,28 @@ import java.awt.*;
 @Accessors(chain = true)
 public class TextElement extends Element {
 
-    //基础属性
-    private String text;                //文本
+    /**
+     * 文本
+     */
+    private String text;
+
+    /**
+     * 字体
+     */
     @Setter
-    private Font font = new Font(null, Font.BOLD, 32);                  //字体
+    private Font font = new Font(null, Font.BOLD, 32);
+
+    /**
+     * 颜色，默认黑色
+     */
     @Setter
-    private Float space;                //字间距
-    private boolean strikeThrough;      //删除线
+    private Color color = new Color(0, 0, 0);
+
+    /**
+     * 旋转
+     */
     @Setter
-    private Color color = new Color(0, 0, 0);   //颜色，默认黑色
-    @Setter
-    private Integer rotate;             //旋转
+    private Integer rotate;
 
 
     private TextElement(String text, int x, int y) {

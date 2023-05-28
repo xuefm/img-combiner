@@ -12,6 +12,8 @@ import java.util.Objects;
  * 默认图片画家
  */
 public class DefaultImagePainter implements IImagePainter {
+
+
     @Override
     public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
         ImageElement imageElement = (ImageElement) element;
