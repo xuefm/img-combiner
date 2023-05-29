@@ -7,15 +7,32 @@ import io.github.xuefm.element.RectangleElement;
 import io.github.xuefm.element.TextElement;
 import io.github.xuefm.enums.OutputFormat;
 import io.github.xuefm.enums.RectangleType;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 public class ImgTest {
 
-    private String filePath = "file:///"+System.getProperty("user.dir")+"/test_file/";
-    private String generateFilePath = System.getProperty("user.dir")+"/test_file/generate/";
+    private static String filePath = "file:///" + System.getProperty("user.dir") + "/test_file/";
+    private static String generateFilePath = System.getProperty("user.dir") + "/test_file/generate/";
+
+
+    @BeforeClass
+    public static void init() {
+        File file = new File(generateFilePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        } else {
+            File[] files = file.listFiles();
+            assert files != null;
+            for (File file1 : files) {
+                file1.delete();
+            }
+        }
+    }
 
     /**
      * 测试添加图片(指定位置)
@@ -27,7 +44,7 @@ public class ImgTest {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
         imageCombiner.addElement(ImageElement.of(filePath + "cat.jpg", 10, 10));
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"img"+ "指定位置.png");
+        imageCombiner.save(generateFilePath + "img" + "指定位置.png");
     }
 
     /**
@@ -40,7 +57,7 @@ public class ImgTest {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
         imageCombiner.addElement(ImageElement.of(filePath + "cat.jpg", 10, 10, 150, 200));
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"img"+ "指定宽高.png");
+        imageCombiner.save(generateFilePath + "img" + "指定宽高.png");
     }
 
     /**
@@ -56,7 +73,7 @@ public class ImgTest {
 
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"img"+ "圆角.png");
+        imageCombiner.save(generateFilePath + "img" + "圆角.png");
     }
 
     /**
@@ -72,7 +89,7 @@ public class ImgTest {
                         .setRotate(45)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"img"+ "旋转.png");
+        imageCombiner.save(generateFilePath + "img" + "旋转.png");
     }
 
     /**
@@ -88,7 +105,7 @@ public class ImgTest {
                         .setAlpha(0.5f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"img"+ "透明.png");
+        imageCombiner.save(generateFilePath + "img" + "透明.png");
     }
 
     /**
@@ -104,7 +121,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, 50)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"text" + "添加文本.png");
+        imageCombiner.save(generateFilePath + "text" + "添加文本.png");
     }
 
     /**
@@ -120,7 +137,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, 50).setColor(Color.yellow)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"text" + "颜色.png");
+        imageCombiner.save(generateFilePath + "text" + "颜色.png");
     }
 
 
@@ -140,7 +157,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, y += 72).setFont(new Font("宋体", Font.BOLD, 72))
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"text" + "字体.png");
+        imageCombiner.save(generateFilePath + "text" + "字体.png");
     }
 
 
@@ -160,7 +177,7 @@ public class ImgTest {
                 TextElement.of("你好，世界", 10, y += 72).setFont(new Font("宋体", Font.BOLD, 72)).setAlpha(0.2f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"text" + "文字透明.png");
+        imageCombiner.save(generateFilePath + "text" + "文字透明.png");
     }
 
     /**
@@ -176,7 +193,7 @@ public class ImgTest {
                 TextElement.of("Hello World", 0, 72).setFont(new Font("微软雅黑", Font.PLAIN, 36))
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"text" + "文字旋转.png");
+        imageCombiner.save(generateFilePath + "text" + "文字旋转.png");
     }
 
     /**
@@ -191,7 +208,7 @@ public class ImgTest {
                 RectangleElement.of(10, 10, 100, 100).setColor(Color.CYAN)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"rectangle" + "矩形.png");
+        imageCombiner.save(generateFilePath + "rectangle" + "矩形.png");
     }
 
     /**
@@ -207,7 +224,7 @@ public class ImgTest {
                 RectangleElement.of(110, 10, 100, 100, RectangleType.FillRoundRect).setRoundCorner(100).setColor(Color.CYAN)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"rectangle" + "矩形圆角.png");
+        imageCombiner.save(generateFilePath + "rectangle" + "矩形圆角.png");
     }
 
     /**
@@ -231,10 +248,8 @@ public class ImgTest {
 
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath+"rectangle" + "矩形全部.png");
+        imageCombiner.save(generateFilePath + "rectangle" + "矩形全部.png");
     }
-
-
 
 
 }
