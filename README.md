@@ -300,5 +300,4 @@ public class ImgTest {
 
 3.在配置中添加对应配置ImageCombinerConfig.setPainter(XxxElement.class,new XxxPainter());
 
-4.
 
