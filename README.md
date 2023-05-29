@@ -1,15 +1,14 @@
 ## 一、介绍
 
-本项目为个人学习使用参考**[dromara](https://gitee.com/dromara) / [image-combiner](https://gitee.com/dromara/image-combiner)**
+本项目为个人学习使用参考[dromara](https://gitee.com/dromara) / [image-combiner](https://gitee.com/dromara/image-combiner)
 
-生产环境建议使用**[dromara](https://gitee.com/dromara) / [image-combiner](https://gitee.com/dromara/image-combiner)**
+生产环境建议使用[dromara](https://gitee.com/dromara) / [image-combiner](https://gitee.com/dromara/image-combiner)
 
 版本要求：JDK17
 
 ## 二、安装
 
 ```xml
-
 <dependency>
     <groupId>io.github.xuefm</groupId>
     <artifactId>img-combiner</artifactId>
