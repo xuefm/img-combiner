@@ -259,22 +259,6 @@ public class ImgTest {
         imageCombiner.save(generateFilePath + "rectangle" + "矩形全部.png");
     }
 
-    @Test
-    public void TextLinElementTest() throws IOException {
-        long l = System.currentTimeMillis();
-        ImageCombinerConfig.setPainter(TextLinElement.class, new TextLinPainter());
-
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
-
-        imageCombiner.addElement(
-                TextElement.of("默认文字实现", 0, 36),
-                TextLinElement.of("添加下划线按", 10, 100).setColor(Color.CYAN).setRotate(90)
-        );
-        imageCombiner.generate();
-
-        imageCombiner.save(generateFilePath + "TextLinElement" + "01.png");
-        System.out.println(System.currentTimeMillis() - l);
-    }
 
     @Getter
     @Accessors(chain = true)
@@ -348,5 +332,21 @@ public class ImgTest {
         }
     }
 
+    @Test
+    public void TextLinElementTest() throws IOException {
+        long l = System.currentTimeMillis();
+        ImageCombinerConfig.setPainter(TextLinElement.class, new TextLinPainter());
+
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+
+        imageCombiner.addElement(
+                TextElement.of("默认文字实现", 0, 36),
+                TextLinElement.of("添加下划线按", 10, 100).setColor(Color.CYAN).setRotate(90)
+        );
+        imageCombiner.generate();
+
+        imageCombiner.save(generateFilePath + "TextLinElement" + "01.png");
+        System.out.println(System.currentTimeMillis() - l);
+    }
 
 }

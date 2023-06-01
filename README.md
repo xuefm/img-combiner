@@ -389,7 +389,7 @@ public static class TextLinPainter implements ITextPainter {
         );
         imageCombiner.generate();
 
-        imageCombiner.save("C:\\Users\\e\\Desktop\\dasd\\a.png");
+        imageCombiner.save(generateFilePath + "TextLinElement" + "01.png");
         System.out.println(System.currentTimeMillis() - l);
     }
 ```
