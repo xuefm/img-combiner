@@ -300,4 +300,98 @@ public class ImgTest {
 
 3.在配置中添加对应配置ImageCombinerConfig.setPainter(XxxElement.class,new XxxPainter());
 
+如下示例实现文本下添加下划线
+
+```java
+
+@Getter
+@Accessors(chain = true)
+public static class TextLinElement extends Element {
+
+    /**
+     * 文本
+     */
+    private String text;
+
+    /**
+     * 字体
+     */
+    @Setter
+    private Font font = new Font(null, Font.BOLD, 32);
+
+    /**
+     * 颜色，默认黑色
+     */
+    @Setter
+    private Color color = new Color(0, 0, 0);
+
+    /**
+     * 旋转
+     */
+    @Setter
+    private Integer rotate;
+
+
+    private TextLinElement(String text, int x, int y) {
+        super(x, y);
+        this.text = text;
+    }
+
+
+    public static TextLinElement of(String text, int x, int y) {
+        return new TextLinElement(text, x, y);
+    }
+
+
+}
+
+public static class TextLinPainter implements ITextPainter {
+    @Override
+    public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
+        TextLinElement textLinElement = (TextLinElement) element;
+        FontMetrics fontMetrics = g2d.getFontMetrics(textLinElement.getFont());
+        int textWidth = fontMetrics.stringWidth(textLinElement.getText()); // 获取文字的宽度
+        int textHeight = fontMetrics.getHeight(); // 获取文字的高度
+        //处理透明
+        if (Objects.nonNull(element.getAlpha())) {
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
+        }
+        //处理旋转
+        if (textLinElement.getRotate() != null) {
+            g2d.rotate(Math.toRadians(textLinElement.getRotate()), element.getX() + textWidth / 2, element.getY() + textHeight / 2);
+        }
+        g2d.setColor(textLinElement.getColor());
+        g2d.setFont(textLinElement.getFont());
+        g2d.drawString(textLinElement.getText(), textLinElement.getX(), textLinElement.getY());
+        //绘制线
+        g2d.drawLine(textLinElement.getX(), textLinElement.getY(), textWidth, textLinElement.getY());
+        //绘制完后反向旋转，以免影响后续元素
+        if (textLinElement.getRotate() != null) {
+            g2d.rotate(-Math.toRadians(textLinElement.getRotate()), element.getX() + textWidth / 2, element.getY() + textHeight / 2);
+        }
+        //绘制完后重新设置透明度，以免影响后续元素
+        if (Objects.nonNull(element.getAlpha())) {
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+        }
+    }
+}
+
+    @Test
+    public void TextLinElementTest() throws IOException {
+        long l = System.currentTimeMillis();
+        ImageCombinerConfig.setPainter(TextLinElement.class, new TextLinPainter());
+
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+
+        imageCombiner.addElement(
+                TextElement.of("默认文字实现", 0, 36),
+                TextLinElement.of("添加下划线按", 10, 100).setColor(Color.CYAN).setRotate(90)
+        );
+        imageCombiner.generate();
+
+        imageCombiner.save("C:\\Users\\e\\Desktop\\dasd\\a.png");
+        System.out.println(System.currentTimeMillis() - l);
+    }
+```
+
 
