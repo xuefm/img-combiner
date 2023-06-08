@@ -1,5 +1,6 @@
 package io.github.xuefm.painter;
 
+import io.github.xuefm.combiner.AbstractImageCombiner;
 import io.github.xuefm.element.Element;
 import io.github.xuefm.element.RectangleElement;
 import io.github.xuefm.exception.ImageBuildException;
@@ -9,10 +10,10 @@ import java.awt.*;
 /**
  * 默认矩形画家
  */
-public class DefaultRectanglePainter implements ILinePainter {
+public class DefaultRectanglePainter implements IPainter {
 
     @Override
-    public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
+    public void draw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
         RectangleElement rectangleElement = (RectangleElement) element;
         g2d.setColor(rectangleElement.getColor());
 

@@ -1,5 +1,6 @@
 package io.github.xuefm;
 
+import io.github.xuefm.combiner.AbstractImageCombiner;
 import io.github.xuefm.combiner.DefaultImageCombiner;
 import io.github.xuefm.combiner.ImageCombiner;
 import io.github.xuefm.config.ImageCombinerConfig;
@@ -7,10 +8,11 @@ import io.github.xuefm.element.Element;
 import io.github.xuefm.element.ImageElement;
 import io.github.xuefm.element.RectangleElement;
 import io.github.xuefm.element.TextElement;
+import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.OutputFormat;
 import io.github.xuefm.enums.RectangleType;
 import io.github.xuefm.exception.ImageBuildException;
-import io.github.xuefm.painter.ITextPainter;
+import io.github.xuefm.painter.IPainter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -259,6 +261,59 @@ public class ImgTest {
         imageCombiner.save(generateFilePath + "rectangle" + "矩形全部.png");
     }
 
+    @Test
+    public void transverseAlignTest() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(1080, 2400, OutputFormat.PNG, 0, 0f);
+        imageCombiner.addElement(
+                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.LEFT, 0, 500, 500)
+                        .setRoundCorner(100),
+                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.CENTER, 520, 500, 500)
+                        .setRoundCorner(100),
+                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.RIGHT, 1040, 500, 500)
+                        .setRoundCorner(100)
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "img" + "横向对其方式测试.png");
+    }
+
+    @Test
+    public void verticalAlignTest() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(1080, 2400, OutputFormat.PNG, 0, 1f);
+        imageCombiner.addElement(
+                ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.TOP, 500, 500)
+                        .setRoundCorner(100),
+                ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.CENTER, 500, 500)
+                        .setRoundCorner(100),
+                ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.BOTTOM, 500, 500)
+                        .setRoundCorner(100)
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "img" + "纵向对其方式测试.png");
+    }
+
+    @Test
+    public void alignDefaultTest1() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(1080, 2400, OutputFormat.PNG, 0, 1f);
+        imageCombiner.addElement(
+                ImageElement.of(filePath + "cat.jpg", 100, 100, 500, 500)
+                        .setRoundCorner(100)
+
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "img" + "使用默认对齐方式.png");
+    }
+
+    @Test
+    public void alignCenterTest12() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(1080, 2400, OutputFormat.PNG, 0, 1f);
+        imageCombiner.addElement(
+                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 500, 500)
+                        .setRoundCorner(100)
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "img" + "居中.png");
+    }
+
 
     @Getter
     @Accessors(chain = true)
@@ -301,9 +356,9 @@ public class ImgTest {
 
     }
 
-    public static class TextLinPainter implements ITextPainter {
+    public static class TextLinPainter implements IPainter {
         @Override
-        public void draw(Graphics2D g2d, Element element) throws ImageBuildException {
+        public void draw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
             TextLinElement textLinElement = (TextLinElement) element;
             FontMetrics fontMetrics = g2d.getFontMetrics(textLinElement.getFont());
             int textWidth = fontMetrics.stringWidth(textLinElement.getText()); // 获取文字的宽度

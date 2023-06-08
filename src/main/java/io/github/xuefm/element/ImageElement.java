@@ -1,5 +1,6 @@
 package io.github.xuefm.element;
 
+import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.ZoomMode;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,8 +68,77 @@ public class ImageElement extends Element {
 
     }
 
+    private ImageElement(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        super(transverseAlign, verticalAlign);
+        this.imgUrl = imgUrl;
+        try {
+            image = ImageIO.read(new URL(imgUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ImageElement(String imgUrl, int x, AlignType.VerticalAlign verticalAlign) {
+        super(x, verticalAlign);
+        this.imgUrl = imgUrl;
+        try {
+            image = ImageIO.read(new URL(imgUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ImageElement(String imgUrl, AlignType.TransverseAlign transverseAlign, int y) {
+        super(transverseAlign, y);
+        this.imgUrl = imgUrl;
+        try {
+            image = ImageIO.read(new URL(imgUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private ImageElement(String imgUrl, int x, int y, Integer width, Integer height) {
         super(x, y);
+        this.imgUrl = imgUrl;
+        this.width = width;
+        this.height = height;
+        try {
+            image = ImageIO.read(new URL(imgUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private ImageElement(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        super(transverseAlign, verticalAlign);
+        this.imgUrl = imgUrl;
+        this.width = width;
+        this.height = height;
+        try {
+            image = ImageIO.read(new URL(imgUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private ImageElement(String imgUrl, AlignType.TransverseAlign transverseAlign, int y, Integer width, Integer height) {
+        super(transverseAlign, y);
+        this.imgUrl = imgUrl;
+        this.width = width;
+        this.height = height;
+        try {
+            image = ImageIO.read(new URL(imgUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private ImageElement(String imgUrl, int x, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        super(x, verticalAlign);
         this.imgUrl = imgUrl;
         this.width = width;
         this.height = height;
@@ -85,12 +155,37 @@ public class ImageElement extends Element {
         this.image = image;
     }
 
+
     public static ImageElement of(String imgUrl, int x, int y) {
         return new ImageElement(imgUrl, x, y);
     }
 
+    public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new ImageElement(imgUrl, transverseAlign, verticalAlign);
+    }
+
+    public static ImageElement of(String imgUrl, int x, AlignType.VerticalAlign verticalAlign) {
+        return new ImageElement(imgUrl, x, verticalAlign);
+    }
+
+    public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, int y) {
+        return new ImageElement(imgUrl, transverseAlign, y);
+    }
+
     public static ImageElement of(String imgUrl, int x, int y, Integer width, Integer height) {
         return new ImageElement(imgUrl, x, y, width, height);
+    }
+
+    public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(imgUrl, transverseAlign, verticalAlign, width, height);
+    }
+
+    public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, int y, Integer width, Integer height) {
+        return new ImageElement(imgUrl, transverseAlign, y, width, height);
+    }
+
+    public static ImageElement of(String imgUrl, int x, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(imgUrl, x, verticalAlign, width, height);
     }
 
     public static ImageElement of(BufferedImage image, int x, int y) {

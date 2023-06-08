@@ -35,7 +35,7 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
     public ImageCombiner generate() {
 
         // 创建空白图片，并指定为支持透明度的类型
-        BufferedImage image = new BufferedImage(this.canvasWidth, this.canvasHeight, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(this.canvasProperty.canvasWidth, this.canvasProperty.canvasHeight, BufferedImage.TYPE_INT_ARGB);
 
         // 在图片上绘制背景色
         Graphics2D g2d = image.createGraphics();
@@ -44,7 +44,7 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
 
         for (Element element : this.elementList) {
             IPainter instance = ImageCombinerConfig.getInstance(element);
-            instance.draw(g2d, element);
+            instance.draw(g2d, element, canvasProperty);
         }
         g2d.dispose();
         combinedImage = image;
@@ -55,7 +55,7 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
     public InputStream getCombinedImageStream() throws ImageBuildException {
         if (combinedImage != null) {
             try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
-                ImageIO.write(combinedImage, outputFormat.getName(), os);
+                ImageIO.write(combinedImage, canvasProperty.outputFormat.getName(), os);
                 return new ByteArrayInputStream(os.toByteArray());
             } catch (Exception e) {
                 throw new ImageBuildException("执行图片合成失败，无法输出文件流");
@@ -68,11 +68,11 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
     @Override
     public void save(String filePath) throws ImageBuildException, IOException {
         if (combinedImage != null) {
-            ImageWriter writer = ImageIO.getImageWritersBySuffix(outputFormat.getName()).next();
+            ImageWriter writer = ImageIO.getImageWritersBySuffix(canvasProperty.outputFormat.getName()).next();
             ImageWriteParam param = writer.getDefaultWriteParam();
             if (param.canWriteCompressed()) {
                 param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-                param.setCompressionQuality(quality);
+                param.setCompressionQuality(canvasProperty.quality);
             }
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             writer.setOutput(new MemoryCacheImageOutputStream(os));
