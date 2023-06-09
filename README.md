@@ -12,7 +12,7 @@
 <dependency>
     <groupId>io.github.xuefm</groupId>
     <artifactId>img-combiner</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
