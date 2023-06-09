@@ -1,5 +1,6 @@
 package io.github.xuefm.element;
 
+import io.github.xuefm.enums.LineWrapType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -36,6 +37,15 @@ public class TextElement extends Element {
     @Setter
     private Integer rotate;
 
+    /**
+     * 自动换行类型 默认不自动换行
+     */
+    private LineWrapType lineWrapType = LineWrapType.NO_LINE_BREAKS;
+
+    /**
+     * 每行最大容量
+     */
+    private int lineMax;
 
     private TextElement(String text, int x, int y) {
         super(x, y);
@@ -45,6 +55,12 @@ public class TextElement extends Element {
 
     public static TextElement of(String text, int x, int y) {
         return new TextElement(text, x, y);
+    }
+
+    public TextElement setLineFeed(LineWrapType lineWrapType, int lineMax) {
+        this.lineWrapType = lineWrapType;
+        this.lineMax = lineMax;
+        return this;
     }
 
 

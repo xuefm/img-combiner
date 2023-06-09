@@ -9,6 +9,7 @@ import io.github.xuefm.element.ImageElement;
 import io.github.xuefm.element.RectangleElement;
 import io.github.xuefm.element.TextElement;
 import io.github.xuefm.enums.AlignType;
+import io.github.xuefm.enums.LineWrapType;
 import io.github.xuefm.enums.OutputFormat;
 import io.github.xuefm.enums.RectangleType;
 import io.github.xuefm.exception.ImageBuildException;
@@ -312,6 +313,29 @@ public class ImgTest {
         );
         imageCombiner.generate();
         imageCombiner.save(generateFilePath + "img" + "居中.png");
+    }
+
+    @Test
+    public void lineFeed() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        imageCombiner.addElement(
+                TextElement.of("abcdefghijklmnopqrstuvwxyz", 10, 80)
+                        .setFont(new Font("微软雅黑", Font.PLAIN, 36)),
+                TextElement.of("abcdefghijklmnopqrstuvwxyz", 10, 160)
+                        .setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                        .setLineFeed(LineWrapType.BY_TEXT_COUNT, 5),
+                TextElement.of("abcdefghijklmnopqrstuvwxyz", 200, 300)
+                        .setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                        .setColor(Color.CYAN)
+                        .setLineFeed(LineWrapType.BY_PIXEL, 100),
+                TextElement.of("abcdefghijklmnopqrstuvwxyz", 200, 300)
+                        .setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                        .setColor(Color.CYAN)
+                        .setLineFeed(LineWrapType.BY_PIXEL, 100)
+                        .setRotate(45)
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "text" + "自动换行.png");
     }
 
 
