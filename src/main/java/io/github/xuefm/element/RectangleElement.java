@@ -1,5 +1,6 @@
 package io.github.xuefm.element;
 
+import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.RectangleType;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,10 +46,32 @@ public class RectangleElement extends Element {
     @Setter
     private Integer roundCorner = 0;
 
-    private RectangleElement(int x, int y, int width, int height) {
-        super(x, y);
+    /**
+     * 旋转角度
+     */
+    @Setter
+    private Integer rotate;
+
+
+    private RectangleElement(AlignType.TransverseAlign transverseAlign, int y, int width, int height, RectangleType rectangleType) {
+        super(transverseAlign, y);
         this.width = width;
         this.height = height;
+        this.rectangleType = rectangleType;
+    }
+
+    private RectangleElement(int x, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
+        super(x, verticalAlign);
+        this.width = width;
+        this.height = height;
+        this.rectangleType = rectangleType;
+    }
+
+    private RectangleElement(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
+        super(transverseAlign, verticalAlign);
+        this.width = width;
+        this.height = height;
+        this.rectangleType = rectangleType;
     }
 
     private RectangleElement(int x, int y, int width, int height, RectangleType rectangleType) {
@@ -58,11 +81,61 @@ public class RectangleElement extends Element {
         this.rectangleType = rectangleType;
     }
 
+    private RectangleElement(int x, int y, int width, int height) {
+        super(x, y);
+        this.width = width;
+        this.height = height;
+    }
+
+    private RectangleElement(AlignType.TransverseAlign transverseAlign, int y, int width, int height) {
+        super(transverseAlign, y);
+        this.width = width;
+        this.height = height;
+    }
+
+    private RectangleElement(int x, AlignType.VerticalAlign verticalAlign, int width, int height) {
+        super(x, verticalAlign);
+        this.width = width;
+        this.height = height;
+    }
+
+    private RectangleElement(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height) {
+        super(transverseAlign, verticalAlign);
+        this.width = width;
+        this.height = height;
+    }
+
+
+    public static RectangleElement of(int x, int y, int width, int height) {
+        return new RectangleElement(x, y, width, height);
+    }
+
+    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, int y, int width, int height) {
+        return new RectangleElement(transverseAlign, y, width, height);
+    }
+
+    public static RectangleElement of(int x, AlignType.VerticalAlign verticalAlign, int width, int height) {
+        return new RectangleElement(x, verticalAlign, width, height);
+    }
+
+    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height) {
+        return new RectangleElement(transverseAlign, verticalAlign, width, height);
+    }
+
+
     public static RectangleElement of(int x, int y, int width, int height, RectangleType rectangleType) {
         return new RectangleElement(x, y, width, height, rectangleType);
     }
 
-    public static RectangleElement of(int x, int y, int width, int height) {
-        return new RectangleElement(x, y, width, height);
+    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, int y, int width, int height, RectangleType rectangleType) {
+        return new RectangleElement(transverseAlign, y, width, height, rectangleType);
+    }
+
+    public static RectangleElement of(int x, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
+        return new RectangleElement(x, verticalAlign, width, height, rectangleType);
+    }
+
+    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
+        return new RectangleElement(transverseAlign, verticalAlign, width, height, rectangleType);
     }
 }

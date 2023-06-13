@@ -9,15 +9,16 @@ import java.awt.*;
 /**
  * 画家接口
  */
+@FunctionalInterface
 public interface IPainter {
 
     /**
      * 绘制
      *
-     * @param g
+     * @param g2d
      * @param element
      * @throws ImageBuildException
      */
 
-    void draw(Graphics2D g, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException;
+    void draw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException;
 }

@@ -428,4 +428,86 @@ public class ImgTest {
         System.out.println(System.currentTimeMillis() - l);
     }
 
+    @Test
+    public void fas() throws IOException {
+        ImageCombinerConfig.setPainter(TextLinElement.class, (g2d, element, c) -> {
+            TextLinElement textLinElement = (TextLinElement) element;
+            FontMetrics fontMetrics = g2d.getFontMetrics(textLinElement.getFont());
+            int textWidth = fontMetrics.stringWidth(textLinElement.getText()); // 获取文字的宽度
+            int textHeight = fontMetrics.getHeight(); // 获取文字的高度
+            //处理透明
+            if (Objects.nonNull(element.getAlpha())) {
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
+            }
+            //处理旋转
+            if (textLinElement.getRotate() != null) {
+                g2d.rotate(Math.toRadians(textLinElement.getRotate()), element.getX() + textWidth / 2, element.getY() + textHeight / 2);
+            }
+            g2d.setColor(textLinElement.getColor());
+            g2d.setFont(textLinElement.getFont());
+            g2d.drawString(textLinElement.getText(), textLinElement.getX(), textLinElement.getY());
+            //绘制线
+            g2d.drawLine(textLinElement.getX(), textLinElement.getY(), textWidth, textLinElement.getY());
+            //绘制完后反向旋转，以免影响后续元素
+            if (textLinElement.getRotate() != null) {
+                g2d.rotate(-Math.toRadians(textLinElement.getRotate()), element.getX() + textWidth / 2, element.getY() + textHeight / 2);
+            }
+            //绘制完后重新设置透明度，以免影响后续元素
+            if (Objects.nonNull(element.getAlpha())) {
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+            }
+        });
+
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        imageCombiner.addElement(
+                TextElement.of("默认文字实现", 0, 36).setColor(Color.CYAN),
+                TextLinElement.of("添加下划线", 0, 100).setColor(Color.CYAN)
+        );
+        imageCombiner.generate();
+
+        imageCombiner.save(generateFilePath + "TextLinElement" + "02.png");
+
+    }
+
+    /**
+     * 添加全部
+     *
+     * @throws IOException
+     */
+    @Test
+    public void addRectangleAllTest2() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        imageCombiner.addElement(
+                RectangleElement.of(10, 10, 100, 100, RectangleType.DrawRect).setColor(Color.CYAN).setRotate(45).setAlpha(0.75f),
+                RectangleElement.of(120, 10, 100, 100, RectangleType.FillRect).setColor(Color.CYAN).setRotate(45).setAlpha(0.5f),
+
+                RectangleElement.of(10, 110, 100, 100, RectangleType.Draw3DRect).setColor(Color.CYAN).setRotate(45).setAlpha(0.25f),
+                RectangleElement.of(120, 110, 100, 100, RectangleType.Fill3DRect).setColor(Color.CYAN).setRotate(45).setAlpha(0.1f),
+
+                RectangleElement.of(10, 220, 100, 100, RectangleType.DrawRoundRect).setRoundCorner(100).setColor(Color.CYAN),
+                RectangleElement.of(120, 220, 100, 100, RectangleType.FillRoundRect).setRoundCorner(100).setColor(Color.CYAN)
+
+
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "rectangle" + "矩形全部2.png");
+    }
+
+    /**
+     * 添加全部
+     *
+     * @throws IOException
+     */
+    @Test
+    public void addRectangleAllTest3() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        imageCombiner.addElement(
+                RectangleElement.of(AlignType.TransverseAlign.LEFT, 10, 100, 100, RectangleType.FillRect).setColor(Color.CYAN).setRotate(22),
+                RectangleElement.of(AlignType.TransverseAlign.CENTER, 110, 100, 100, RectangleType.FillRect).setColor(Color.CYAN).setRotate(45),
+                RectangleElement.of(AlignType.TransverseAlign.RIGHT, 220, 100, 100, RectangleType.FillRect).setColor(Color.CYAN).setRotate(47).setAlpha(0.5f)
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "rectangle" + "矩形添加对齐方式和透明旋转等.png");
+    }
+
 }

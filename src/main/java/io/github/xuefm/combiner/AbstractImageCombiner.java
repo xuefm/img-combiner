@@ -32,7 +32,6 @@ public abstract class AbstractImageCombiner implements ImageCombiner {
         this.canvasProperty = new CanvasProperty(canvasWidth, canvasHeight, outputFormat, roundCorner, quality);
     }
 
-    //
 
     @Getter
     @AllArgsConstructor
