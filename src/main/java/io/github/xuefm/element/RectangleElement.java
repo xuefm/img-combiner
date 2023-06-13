@@ -3,6 +3,7 @@ package io.github.xuefm.element;
 import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.RectangleType;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -51,6 +52,51 @@ public class RectangleElement extends Element {
      */
     @Setter
     private Integer rotate;
+
+
+    public RectangleElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
+        super.transverseAlign = transverseAlign;
+        return this;
+    }
+
+    public RectangleElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
+        super.verticalAlign = verticalAlign;
+        return this;
+    }
+
+    public RectangleElement setAlpha(float alpha) {
+        super.alpha = alpha;
+        return this;
+    }
+
+    public void setActualXAndY(Integer actualX, Integer actualY) {
+        super.actualX = actualX;
+        super.actualY = actualY;
+    }
+
+    /**
+     * 默认按元素中心旋转
+     *
+     * @param rotate
+     */
+    public RectangleElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置旋转并设置实际旋转x和y坐标
+     *
+     * @param rotate
+     * @param actualRotateX
+     * @param actualRotateY
+     */
+    public RectangleElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
+        this.rotate = rotate;
+        this.actualRotateX = actualRotateX;
+        this.actualRotateY = actualRotateY;
+        return this;
+    }
 
 
     private RectangleElement(AlignType.TransverseAlign transverseAlign, int y, int width, int height, RectangleType rectangleType) {

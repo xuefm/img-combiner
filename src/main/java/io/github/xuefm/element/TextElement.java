@@ -1,7 +1,9 @@
 package io.github.xuefm.element;
 
+import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.LineWrapType;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -46,6 +48,51 @@ public class TextElement extends Element {
      * 每行最大容量
      */
     private int lineMax;
+
+
+    public TextElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
+        super.transverseAlign = transverseAlign;
+        return this;
+    }
+
+    public TextElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
+        super.verticalAlign = verticalAlign;
+        return this;
+    }
+
+    public TextElement setAlpha(float alpha) {
+        super.alpha = alpha;
+        return this;
+    }
+
+    public void setActualXAndY(Integer actualX, Integer actualY) {
+        super.actualX = actualX;
+        super.actualY = actualY;
+    }
+
+    /**
+     * 默认按元素中心旋转
+     *
+     * @param rotate
+     */
+    public TextElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置旋转并设置实际旋转x和y坐标
+     *
+     * @param rotate
+     * @param actualRotateX
+     * @param actualRotateY
+     */
+    public TextElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
+        this.rotate = rotate;
+        this.actualRotateX = actualRotateX;
+        this.actualRotateY = actualRotateY;
+        return this;
+    }
 
     private TextElement(String text, int x, int y) {
         super(x, y);

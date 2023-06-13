@@ -14,21 +14,19 @@ import java.util.Objects;
  */
 public class DefaultImagePainter implements IPainter {
 
-
     @Override
-    public void draw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
+    public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         ImageElement imageElement = (ImageElement) element;
 
-        //处理宽高
-        int width = imageElement.getImage().getWidth();
-        int height = imageElement.getImage().getHeight();
-        if (Objects.nonNull(imageElement.getWidth())) {
-            width = imageElement.getWidth();
+        //若未设置宽则使用图片原始宽
+        if (Objects.isNull(imageElement.getWidth())) {
+            imageElement.setWidth(imageElement.getImage().getWidth());
         }
-        if (Objects.nonNull(imageElement.getWidth())) {
-            height = imageElement.getHeight();
+        //若未设置高则使用图片原始高
+        if (Objects.isNull(imageElement.getHeight())) {
+            imageElement.setHeight(imageElement.getImage().getHeight());
         }
-        //处理对齐方式
+        //处理对齐方式(计算出实际绘制的x和y坐标)
         int x = 0;
         int y = 0;
         switch (element.getTransverseAlign()) {
@@ -43,32 +41,42 @@ public class DefaultImagePainter implements IPainter {
             case BOTTOM -> y = canvasProperty.getCanvasHeight() - imageElement.getHeight();
             default -> throw new ImageBuildException("对齐方式错误");
         }
-
+        imageElement.setActualXAndY(x, y);
         //处理透明
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
         //处理旋转
         if (imageElement.getRotate() != null) {
-            g2d.rotate(Math.toRadians(imageElement.getRotate()), x + imageElement.getWidth() / 2, y + imageElement.getHeight() / 2);
+            if (Objects.isNull(imageElement.getActualRotateX()) || Objects.isNull(imageElement.getActualRotateY())) {
+                imageElement.setRotate(imageElement.getRotate(),
+                        imageElement.getActualX() + imageElement.getWidth() / 2,
+                        imageElement.getActualY() + imageElement.getHeight() / 2
+                );
+            }
+            g2d.rotate(Math.toRadians(imageElement.getRotate()), imageElement.getActualRotateX(), imageElement.getActualRotateY());
         }
-
         //处理圆角
         if (Objects.nonNull(imageElement.getRoundCorner())) {
-            g2d.setClip(new RoundRectangle2D.Double(x, y, width, height, imageElement.getRoundCorner(), imageElement.getRoundCorner()));
+            g2d.setClip(new RoundRectangle2D.Double(imageElement.getActualX(), imageElement.getActualY(), imageElement.getWidth(), imageElement.getHeight(), imageElement.getRoundCorner(), imageElement.getRoundCorner()));
         }
+    }
 
-        //绘制
-        g2d.drawImage(imageElement.getImage(), x, y, width, height, null);
+    @Override
+    public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+        ImageElement imageElement = (ImageElement) element;
+        g2d.drawImage(imageElement.getImage(), imageElement.getActualX(), imageElement.getActualY(), imageElement.getWidth(), imageElement.getHeight(), null);
 
+    }
 
+    @Override
+    public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+        ImageElement imageElement = (ImageElement) element;
         //绘制完后反向旋转，以免影响后续元素
         if (imageElement.getRotate() != null) {
-            g2d.rotate(-Math.toRadians(imageElement.getRotate()), x + imageElement.getWidth() / 2, y + imageElement.getHeight() / 2);
+            g2d.rotate(-Math.toRadians(imageElement.getRotate()), imageElement.getActualRotateX(), imageElement.getActualRotateY());
         }
         //绘制完后重新设置透明度，以免影响后续元素
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
-
-
     }
 }

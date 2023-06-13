@@ -63,7 +63,12 @@ public class DefaultITextPainter implements IPainter {
     }
 
     @Override
-    public void draw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
+    public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+
+    }
+
+    @Override
+    public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
         TextElement textElement = (TextElement) element;
         FontMetrics fontMetrics = g2d.getFontMetrics(textElement.getFont());
         int textHeight = fontMetrics.getHeight(); // 获取文字的高度
@@ -117,4 +122,10 @@ public class DefaultITextPainter implements IPainter {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
     }
+
+    @Override
+    public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+
+    }
+
 }

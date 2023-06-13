@@ -1,8 +1,8 @@
 package io.github.xuefm.element;
 
 import io.github.xuefm.enums.AlignType;
-import io.github.xuefm.enums.ZoomMode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -31,11 +31,13 @@ public class ImageElement extends Element {
     /**
      * 绘制宽度
      */
+    @Setter
     private Integer width;
 
     /**
      * 绘制高度
      */
+    @Setter
     private Integer height;
 
     /**
@@ -44,17 +46,49 @@ public class ImageElement extends Element {
     @Setter
     private Integer roundCorner;
 
-    /**
-     * 缩放模式
-     */
-    @Setter
-    private ZoomMode zoomMode;
+    public ImageElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
+        super.transverseAlign = transverseAlign;
+        return this;
+    }
+
+    public ImageElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
+        super.verticalAlign = verticalAlign;
+        return this;
+    }
+
+    public ImageElement setAlpha(float alpha) {
+        super.alpha = alpha;
+        return this;
+    }
+
+    public void setActualXAndY(Integer actualX, Integer actualY) {
+        super.actualX = actualX;
+        super.actualY = actualY;
+    }
 
     /**
-     * 旋转角度
+     * 默认按元素中心旋转
+     *
+     * @param rotate
      */
-    @Setter
-    private Integer rotate;
+    public ImageElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置旋转并设置实际旋转x和y坐标
+     *
+     * @param rotate
+     * @param actualRotateX
+     * @param actualRotateY
+     */
+    public ImageElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
+        this.rotate = rotate;
+        this.actualRotateX = actualRotateX;
+        this.actualRotateY = actualRotateY;
+        return this;
+    }
 
 
     private ImageElement(String imgUrl, int x, int y) {

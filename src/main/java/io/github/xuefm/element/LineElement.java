@@ -1,6 +1,8 @@
 package io.github.xuefm.element;
 
+import io.github.xuefm.enums.AlignType;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 import java.awt.*;
@@ -24,6 +26,52 @@ public class LineElement extends Element {
      * 颜色，默认黑色
      */
     private Color color = new Color(0, 0, 0);
+
+
+    public LineElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
+        super.transverseAlign = transverseAlign;
+        return this;
+    }
+
+    public LineElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
+        super.verticalAlign = verticalAlign;
+        return this;
+    }
+
+    public LineElement setAlpha(float alpha) {
+        super.alpha = alpha;
+        return this;
+    }
+
+    public LineElement setActualXAndY(Integer actualX, Integer actualY) {
+        super.actualX = actualX;
+        super.actualY = actualY;
+        return this;
+    }
+
+    /**
+     * 默认按元素中心旋转
+     *
+     * @param rotate
+     */
+    public LineElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置旋转并设置实际旋转x和y坐标
+     *
+     * @param rotate
+     * @param actualRotateX
+     * @param actualRotateY
+     */
+    public LineElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
+        this.rotate = rotate;
+        this.actualRotateX = actualRotateX;
+        this.actualRotateY = actualRotateY;
+        return this;
+    }
 
 
     private LineElement(int x, int y, int x2, int y2) {

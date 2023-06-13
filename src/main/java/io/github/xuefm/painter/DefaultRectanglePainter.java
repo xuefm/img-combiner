@@ -15,7 +15,12 @@ import java.util.Objects;
 public class DefaultRectanglePainter implements IPainter {
 
     @Override
-    public void draw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
+    public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+
+    }
+
+    @Override
+    public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
         RectangleElement rectangleElement = (RectangleElement) element;
         g2d.setColor(rectangleElement.getColor());
 
@@ -53,10 +58,8 @@ public class DefaultRectanglePainter implements IPainter {
             case FillRect -> g2d.fillRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight());
             case Draw3DRect -> g2d.draw3DRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight(), false);
             case Fill3DRect -> g2d.fill3DRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight(), false);
-            case DrawRoundRect ->
-                    g2d.drawRoundRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner());
-            case FillRoundRect ->
-                    g2d.fillRoundRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner());
+            case DrawRoundRect -> g2d.drawRoundRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner());
+            case FillRoundRect -> g2d.fillRoundRect(x, y, rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner());
             default -> throw new ImageBuildException("PLEASE SET 'rectangleType' PROPERTY");
         }
 
@@ -68,7 +71,10 @@ public class DefaultRectanglePainter implements IPainter {
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
+    }
 
+    @Override
+    public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
 
     }
 }
