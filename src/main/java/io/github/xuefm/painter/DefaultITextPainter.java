@@ -64,68 +64,98 @@ public class DefaultITextPainter implements IPainter {
 
     @Override
     public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
-
-    }
-
-    @Override
-    public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
         TextElement textElement = (TextElement) element;
+        //设置颜色
+        g2d.setColor(textElement.getColor());
+        //设置字体
+        g2d.setFont(textElement.getFont());
+
         FontMetrics fontMetrics = g2d.getFontMetrics(textElement.getFont());
-        int textHeight = fontMetrics.getHeight(); // 获取文字的高度
-
-
-        //处理透明
-        if (Objects.nonNull(element.getAlpha())) {
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
-        }
+        //获取文字的高度
+        int textHeight = fontMetrics.getHeight();
+        textElement.setTextHeight(textHeight);
 
         //处理换行
         //转换为List<String>
-        List<String> stringList = new ArrayList<>();
+        List<String> textList = new ArrayList<>();
         switch (textElement.getLineWrapType()) {
-            case NO_LINE_BREAKS -> stringList.add(textElement.getText());
-            case BY_TEXT_COUNT -> stringList.addAll(splitByTextCount(textElement.getText(), textElement.getLineMax()));
+            case NO_LINE_BREAKS -> textList.add(textElement.getText());
+            case BY_TEXT_COUNT -> textList.addAll(splitByTextCount(textElement.getText(), textElement.getLineMax()));
             case BY_PIXEL ->
-                    stringList.addAll(splitByPixel(textElement.getText(), textElement.getLineMax(), fontMetrics));
+                    textList.addAll(splitByPixel(textElement.getText(), textElement.getLineMax(), fontMetrics));
             default -> throw new ImageBuildException("换行方式错误");
         }
+        textElement.setTextList(textList);
         //计算文本所占宽高
         int width = 0; //宽(文本宽,文本最大宽)
-        int height = textHeight * stringList.size(); //高(文本所占高,单行高度*行数)
-        for (String s : stringList) {
+        int height = textHeight * textList.size(); //高(文本所占高,单行高度*行数)
+        for (String s : textList) {
             int i = fontMetrics.stringWidth(s);
             if (i > width) {
                 width = i;
             }
         }
+        textElement.setWidthAndHeight(width, height);
 
+        //处理对齐方式(计算出实际绘制的x和y坐标)
+        int x = 0;
+        int y = 0;
+        switch (element.getTransverseAlign()) {
+            case LEFT -> x = element.getX();
+            case CENTER -> x = (canvasProperty.getCanvasWidth() - textElement.getWidth()) / 2;
+            case RIGHT -> x = canvasProperty.getCanvasWidth() - textElement.getWidth();
+            default -> throw new ImageBuildException("对齐方式错误");
+        }
+        switch (element.getVerticalAlign()) {
+            case TOP -> y = element.getY();
+            case CENTER -> y = (canvasProperty.getCanvasHeight() - textElement.getHeight()) / 2;
+            case BOTTOM -> y = canvasProperty.getCanvasHeight() - textElement.getHeight();
+            default -> throw new ImageBuildException("对齐方式错误");
+        }
+        y = y - fontMetrics.getDescent();
+        textElement.setActualXAndY(x, y);
 
+        //处理透明
+        if (Objects.nonNull(element.getAlpha())) {
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
+        }
         //处理旋转
         if (textElement.getRotate() != null) {
-            g2d.rotate(Math.toRadians(textElement.getRotate()), element.getX() + width / 2, element.getY() + height / 2);
+            if (Objects.isNull(textElement.getActualRotateX()) || Objects.isNull(textElement.getActualRotateY())) {
+                textElement.setRotate(textElement.getRotate(),
+                        textElement.getActualX() + textElement.getWidth() / 2,
+                        textElement.getActualY() - textElement.getTextHeight() + textElement.getHeight() / 2
+                );
+            }
+            g2d.rotate(Math.toRadians(textElement.getRotate()), textElement.getActualRotateX(), textElement.getActualRotateY());
+        }
+    }
+
+    @Override
+    public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
+        TextElement textElement = (TextElement) element;
+
+
+        //开始绘制
+        int y = textElement.getActualY();
+        for (String string : textElement.getTextList()) {
+            y += textElement.getTextHeight();
+            g2d.drawString(string, textElement.getActualX(), y);
         }
 
-        g2d.setColor(textElement.getColor());
-        g2d.setFont(textElement.getFont());
-        //开始绘制
-        int y = textElement.getY();
-        for (String string : stringList) {
-            g2d.drawString(string, textElement.getX(), y);
-            y += textHeight;
-        }
+    }
+
+    @Override
+    public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+        TextElement textElement = (TextElement) element;
         //绘制完后反向旋转，以免影响后续元素
         if (textElement.getRotate() != null) {
-            g2d.rotate(-Math.toRadians(textElement.getRotate()), element.getX() + width / 2, element.getY() + height / 2);
+            g2d.rotate(-Math.toRadians(textElement.getRotate()), textElement.getActualRotateX(), textElement.getActualRotateY());
         }
         //绘制完后重新设置透明度，以免影响后续元素
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
-    }
-
-    @Override
-    public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
-
     }
 
 }

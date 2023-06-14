@@ -78,5 +78,9 @@ public class DefaultImagePainter implements IPainter {
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
+        //处理圆角
+        if (Objects.nonNull(imageElement.getRoundCorner())) {
+            g2d.setClip(null);
+        }
     }
 }
