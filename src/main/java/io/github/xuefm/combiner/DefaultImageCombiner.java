@@ -37,8 +37,10 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
         // 创建空白图片，并指定为支持透明度的类型
         BufferedImage image = new BufferedImage(this.canvasProperty.canvasWidth, this.canvasProperty.canvasHeight, BufferedImage.TYPE_INT_ARGB);
 
-        // 在图片上绘制背景色
         Graphics2D g2d = image.createGraphics();
+        // 设置抗锯齿
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        // 在图片上绘制背景色
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
 
