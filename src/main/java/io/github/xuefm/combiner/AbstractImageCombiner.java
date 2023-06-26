@@ -56,7 +56,7 @@ public abstract class AbstractImageCombiner implements ImageCombiner {
         protected Integer roundCorner;
 
         /**
-         * 图片保存质量
+         * 图片保存质量(取值0~1) 数值越大则生成的图片文件越大、越清晰
          */
         protected Float quality = 1f;
     }
