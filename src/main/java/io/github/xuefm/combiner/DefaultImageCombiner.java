@@ -56,10 +56,22 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
     @Override
     public InputStream getCombinedImageStream() throws ImageBuildException {
         if (combinedImage != null) {
-            try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
-                ImageIO.write(combinedImage, canvasProperty.outputFormat.getName(), os);
-                return new ByteArrayInputStream(os.toByteArray());
-            } catch (Exception e) {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            // 获取 ImageWriter 对象
+            ImageWriter writer = ImageIO.getImageWritersBySuffix(canvasProperty.outputFormat.getName()).next();
+            // 创建 ImageWriteParam 对象，并设置压缩质量
+            ImageWriteParam param = writer.getDefaultWriteParam();
+            if (param.canWriteCompressed()) {
+                param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+                param.setCompressionQuality(canvasProperty.quality);
+            }
+            try {
+                // 将 BufferedImage 写入到 ByteArrayOutputStream
+                writer.setOutput(new MemoryCacheImageOutputStream(outputStream));
+                writer.write(null, new javax.imageio.IIOImage(combinedImage, null, null), param);
+                writer.dispose();
+                return new ByteArrayInputStream(outputStream.toByteArray());
+            } catch (IOException e) {
                 throw new ImageBuildException("执行图片合成失败，无法输出文件流");
             }
         } else {
