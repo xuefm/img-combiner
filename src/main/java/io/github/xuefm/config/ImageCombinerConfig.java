@@ -33,7 +33,7 @@ public class ImageCombinerConfig {
      */
     public static void setPainter(Class<? extends Element> elementClass, IPainter painter) {
         if (painter == null)
-            throw new ImageBuildException("painter CANNOT BE EMPTY");
+            throw new ImageBuildException("PAINTER CANNOT BE EMPTY");
         painterMap.put(elementClass, painter);
 
     }
