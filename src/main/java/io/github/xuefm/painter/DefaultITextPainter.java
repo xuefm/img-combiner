@@ -6,6 +6,8 @@ import io.github.xuefm.element.TextElement;
 import io.github.xuefm.exception.ImageBuildException;
 
 import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -86,6 +88,22 @@ public class DefaultITextPainter implements IPainter {
             default -> throw new ImageBuildException("换行方式错误");
         }
         textElement.setTextList(textList);
+        List<AttributedString> attributedStringList = new ArrayList<>(textList.size());
+        for (String s : textList) {
+            AttributedString attributedString = new AttributedString(s);
+            //字体
+            attributedString.addAttribute(TextAttribute.FONT, textElement.getFont());
+            //下划线
+            if (textElement.isUnderline()) {
+                attributedString.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+            }
+            //删除线
+            if (textElement.isStrikethrough()) {
+                attributedString.addAttribute(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+            }
+            attributedStringList.add(attributedString);
+        }
+        textElement.setAttributedStringList(attributedStringList);
         //计算文本所占宽高
         int width = 0; //宽(文本宽,文本最大宽)
         int height = textHeight * textList.size(); //高(文本所占高,单行高度*行数)
@@ -135,12 +153,11 @@ public class DefaultITextPainter implements IPainter {
     public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) throws ImageBuildException {
         TextElement textElement = (TextElement) element;
 
-
         //开始绘制
         int y = textElement.getActualY();
-        for (String string : textElement.getTextList()) {
+        for (AttributedString attributedString : textElement.getAttributedStringList()) {
             y += textElement.getTextHeight();
-            g2d.drawString(string, textElement.getActualX(), y);
+            g2d.drawString(attributedString.getIterator(), textElement.getActualX(), y);
         }
 
     }

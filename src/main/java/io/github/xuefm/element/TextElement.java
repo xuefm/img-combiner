@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.awt.*;
+import java.text.AttributedString;
 import java.util.List;
 
 /**
@@ -39,10 +40,26 @@ public class TextElement extends Element {
     private LineWrapType lineWrapType = LineWrapType.NO_LINE_BREAKS;
 
     /**
-     * 每行最大容量
+     * 每行最大容量(自动换行)
      */
     private int lineMax;
 
+
+    /**
+     * 是否使用下划线(默认不使用)
+     */
+    @Setter
+    private boolean underline;
+
+    /**
+     * 是否使用删除线(默认不使用)
+     */
+    @Setter
+    private boolean strikethrough;
+
+    /**
+     * 行高(计算值，请勿手动设置)
+     */
     private Integer textHeight;
 
     /**
@@ -59,6 +76,10 @@ public class TextElement extends Element {
      * 换行处理后的textList(计算值，请勿手动设置)
      */
     private List<String> textList;
+    /**
+     * 带属性(字体、下划线、删除线等属性)字符串列表(计算值，请勿手动设置)
+     */
+    private List<AttributedString> attributedStringList;
 
 
     private TextElement(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
@@ -116,6 +137,10 @@ public class TextElement extends Element {
 
     public void setTextList(List<String> textList) {
         this.textList = textList;
+    }
+
+    public void setAttributedStringList(List<AttributedString> attributedStringList) {
+        this.attributedStringList = attributedStringList;
     }
 
     public void setTextHeight(int textHeight) {

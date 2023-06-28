@@ -205,11 +205,14 @@ public class ImgTest {
                 TextElement.of("汉字文本：你好世界", AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.BOTTOM).setFont(new Font("微软雅黑", Font.PLAIN, 32))
                         .setAlpha(1f)
                         .setColor(Color.CYAN)
-                        .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3),
+                        .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3)
+                        .setStrikethrough(true)
+                ,
                 TextElement.of("汉字文本：你好世界", 0, 0).setFont(new Font("宋体", Font.PLAIN, 32))
                         .setAlpha(1f)
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3)
+                        .setUnderline(true)
         );
         imageCombiner.generate();
         imageCombiner.save(generateFilePath + "混合01" + "_t01MixingTest.png");
