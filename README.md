@@ -31,7 +31,6 @@ import io.github.xuefm.element.TextElement;
 import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.LineWrapType;
 import io.github.xuefm.enums.OutputFormat;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -87,6 +86,7 @@ public class ImgTest {
 
     /**
      * 图片测试(主要测试纵向对齐)
+     *
      * @throws IOException
      */
     @Test
@@ -112,6 +112,7 @@ public class ImgTest {
 
     /**
      * 矩形测试(主要横向试纵向对齐)
+     *
      * @throws IOException
      */
     @Test
@@ -141,6 +142,7 @@ public class ImgTest {
 
     /**
      * 矩形测试(主要横向试纵向对齐)
+     *
      * @throws IOException
      */
     @Test
@@ -226,11 +228,14 @@ public class ImgTest {
                 TextElement.of("汉字文本：你好世界", AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.BOTTOM).setFont(new Font("微软雅黑", Font.PLAIN, 32))
                         .setAlpha(1f)
                         .setColor(Color.CYAN)
-                        .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3),
+                        .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3)
+                        .setStrikethrough(true)
+                ,
                 TextElement.of("汉字文本：你好世界", 0, 0).setFont(new Font("宋体", Font.PLAIN, 32))
                         .setAlpha(1f)
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3)
+                        .setUnderline(true)
         );
         imageCombiner.generate();
         imageCombiner.save(generateFilePath + "混合01" + "_t01MixingTest.png");
@@ -238,7 +243,6 @@ public class ImgTest {
 
 
 }
-
 ```
 
 ## 四、详细
