@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ImageCombiner的默认实现
@@ -23,27 +24,62 @@ import java.util.List;
 public class DefaultImageCombiner extends AbstractImageCombiner {
 
 
-    private DefaultImageCombiner(List<Element> elementList, int canvasWidth, int canvasHeight, OutputFormat outputFormat, Integer roundCorner, Float quality) {
-        super(elementList, canvasWidth, canvasHeight, outputFormat, roundCorner, quality);
+    private DefaultImageCombiner(List<Element> elementList, int canvasWidth, int canvasHeight, Color backgroundColor, OutputFormat outputFormat, Integer roundCorner, Float quality) {
+        super(elementList, canvasWidth, canvasHeight, backgroundColor, outputFormat, roundCorner, quality);
     }
 
+    /**
+     * 默认白色背景
+     *
+     * @param canvasWidth  画布宽
+     * @param canvasHeight 画布高
+     * @param outputFormat 文件类型
+     * @param roundCorner  圆角
+     * @param quality      图片质量
+     * @return ImageCombiner
+     */
     public static ImageCombiner of(int canvasWidth, int canvasHeight, OutputFormat outputFormat, Integer roundCorner, Float quality) {
-        return new DefaultImageCombiner(new ArrayList<>(), canvasWidth, canvasHeight, outputFormat, roundCorner, quality);
+        return new DefaultImageCombiner(new ArrayList<>(), canvasWidth, canvasHeight, Color.WHITE, outputFormat, roundCorner, quality);
+    }
+
+    /**
+     * @param canvasWidth     画布宽
+     * @param canvasHeight    画布高
+     * @param outputFormat    文件类型
+     * @param backgroundColor 背景颜色 (当图片至此透明时，为null时为透明背景)
+     * @param roundCorner     圆角
+     * @param quality         图片质量
+     * @return ImageCombiner
+     */
+    public static ImageCombiner of(int canvasWidth, int canvasHeight, Color backgroundColor, OutputFormat outputFormat, Integer roundCorner, Float quality) {
+        return new DefaultImageCombiner(new ArrayList<>(), canvasWidth, canvasHeight, backgroundColor, outputFormat, roundCorner, quality);
     }
 
     @Override
     public ImageCombiner generate() {
 
-        // 创建空白图片，并指定为支持透明度的类型
-        BufferedImage image = new BufferedImage(this.canvasProperty.canvasWidth, this.canvasProperty.canvasHeight, BufferedImage.TYPE_INT_ARGB);
+        //根据图片类型指定颜色模型
+        BufferedImage image;
+        switch (canvasProperty.outputFormat) {
+            case JPG, JPEG ->
+                    image = new BufferedImage(this.canvasProperty.canvasWidth, this.canvasProperty.canvasHeight, BufferedImage.TYPE_INT_RGB);
+            case PNG ->
+                    image = new BufferedImage(this.canvasProperty.canvasWidth, this.canvasProperty.canvasHeight, BufferedImage.TYPE_INT_ARGB);
+            case BMP ->
+                    image = new BufferedImage(this.canvasProperty.canvasWidth, this.canvasProperty.canvasHeight, BufferedImage.TYPE_3BYTE_BGR);
+            default -> throw new ImageBuildException("不支持该文件格式");
+        }
 
         Graphics2D g2d = image.createGraphics();
-        // 设置抗锯齿
+        //设置抗锯齿
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        // 在图片上绘制背景色
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
 
+        //在图片上绘制背景色
+        if (Objects.nonNull(canvasProperty.backgroundColor)) {
+            g2d.setColor(canvasProperty.backgroundColor);
+            g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
+        }
+        //逐个绘制每个元素
         for (Element element : this.elementList) {
             IPainter instance = ImageCombinerConfig.getInstance(element);
             instance.draw(g2d, element, canvasProperty);

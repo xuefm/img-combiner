@@ -5,6 +5,7 @@ import io.github.xuefm.enums.OutputFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
@@ -30,23 +31,30 @@ public abstract class AbstractImageCombiner implements ImageCombiner {
      */
     protected final CanvasProperty canvasProperty;
 
-    public AbstractImageCombiner(List<Element> elementList, int canvasWidth, int canvasHeight, OutputFormat outputFormat, Integer roundCorner, Float quality) {
+    public AbstractImageCombiner(List<Element> elementList, int canvasWidth, int canvasHeight, Color backgroundColor, OutputFormat outputFormat, Integer roundCorner, Float quality) {
         this.elementList = elementList;
-        this.canvasProperty = new CanvasProperty(canvasWidth, canvasHeight, outputFormat, roundCorner, quality);
+        this.canvasProperty = new CanvasProperty(canvasWidth, canvasHeight, backgroundColor, outputFormat, roundCorner, quality);
     }
 
 
     @Getter
     @AllArgsConstructor
     public static class CanvasProperty {
+
         /**
          * 画布宽度
          */
         protected int canvasWidth;
+
         /**
          * 画布高度
          */
         protected int canvasHeight;
+
+        /**
+         * 画布背景色(默认白色，当值为为null时为透明背景)
+         */
+        protected Color backgroundColor;
 
         /**
          * 输出图片格式
