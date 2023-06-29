@@ -72,7 +72,7 @@ public class DefaultRectanglePainter implements IPainter {
                     g2d.drawRoundRect(rectangleElement.getActualX(), rectangleElement.getActualY(), rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner());
             case FillRoundRect ->
                     g2d.fillRoundRect(rectangleElement.getActualX(), rectangleElement.getActualY(), rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner());
-            default -> throw new ImageBuildException("PLEASE SET 'rectangleType' PROPERTY");
+            default -> throw new ImageBuildException("矩形属性不支持" + rectangleElement.getRectangleType());
         }
 
 

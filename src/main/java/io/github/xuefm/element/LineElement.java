@@ -3,10 +3,14 @@ package io.github.xuefm.element;
 import io.github.xuefm.enums.AlignType;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.awt.*;
 
+/**
+ * 线形元素
+ */
 @Getter
 @Accessors(chain = true)
 public class LineElement extends Element {
@@ -25,6 +29,7 @@ public class LineElement extends Element {
     /**
      * 颜色，默认黑色
      */
+    @Setter
     private Color color = new Color(0, 0, 0);
 
 
@@ -52,7 +57,8 @@ public class LineElement extends Element {
     /**
      * 默认按元素中心旋转
      *
-     * @param rotate
+     * @param rotate 旋转角度
+     * @return LineElement
      */
     public LineElement setRotate(@NonNull Integer rotate) {
         super.rotate = rotate;
@@ -62,9 +68,10 @@ public class LineElement extends Element {
     /**
      * 设置旋转并设置实际旋转x和y坐标
      *
-     * @param rotate
-     * @param actualRotateX
-     * @param actualRotateY
+     * @param rotate        旋转角度
+     * @param actualRotateX 实际旋转x坐标
+     * @param actualRotateY 实际旋转y坐标
+     * @return LineElement
      */
     public LineElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
         this.rotate = rotate;

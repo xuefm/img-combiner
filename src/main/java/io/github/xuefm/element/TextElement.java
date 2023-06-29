@@ -11,7 +11,7 @@ import java.text.AttributedString;
 import java.util.List;
 
 /**
- * 图片元素
+ * 文本元素
  */
 @Getter
 @Accessors(chain = true)
@@ -20,7 +20,7 @@ public class TextElement extends Element {
     /**
      * 文本
      */
-    private String text;
+    private final String text;
 
     /**
      * 字体
@@ -160,7 +160,8 @@ public class TextElement extends Element {
     /**
      * 默认按元素中心旋转
      *
-     * @param rotate
+     * @param rotate 旋转角度
+     * @return TextElement
      */
     public TextElement setRotate(int rotate) {
         super.rotate = rotate;
@@ -170,9 +171,10 @@ public class TextElement extends Element {
     /**
      * 设置旋转并设置实际旋转x和y坐标
      *
-     * @param rotate
-     * @param actualRotateX
-     * @param actualRotateY
+     * @param rotate        旋转角度
+     * @param actualRotateX 实际旋转x坐标
+     * @param actualRotateY 实际旋转y坐标
+     * @return TextElement
      */
     public TextElement setRotate(int rotate, int actualRotateX, int actualRotateY) {
         this.rotate = rotate;
@@ -181,6 +183,13 @@ public class TextElement extends Element {
         return this;
     }
 
+    /**
+     * 设置自动换行
+     *
+     * @param lineWrapType 自动换行类型
+     * @param lineMax      每行最多容纳多少
+     * @return TextElement
+     */
     public TextElement setLineFeed(LineWrapType lineWrapType, int lineMax) {
         this.lineWrapType = lineWrapType;
         this.lineMax = lineMax;

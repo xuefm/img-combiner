@@ -25,6 +25,9 @@ public abstract class AbstractImageCombiner implements ImageCombiner {
      */
     protected BufferedImage combinedImage;
 
+    /**
+     * 画布属性
+     */
     protected final CanvasProperty canvasProperty;
 
     public AbstractImageCombiner(List<Element> elementList, int canvasWidth, int canvasHeight, OutputFormat outputFormat, Integer roundCorner, Float quality) {

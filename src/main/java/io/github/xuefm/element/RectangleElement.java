@@ -39,6 +39,7 @@ public class RectangleElement extends Element {
      * 默认矩形填充
      */
     @Setter
+    @NonNull
     private RectangleType rectangleType = RectangleType.FillRect;
 
     /**
@@ -46,12 +47,6 @@ public class RectangleElement extends Element {
      */
     @Setter
     private Integer roundCorner = 0;
-
-    /**
-     * 旋转角度
-     */
-    @Setter
-    private Integer rotate;
 
 
     public RectangleElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
@@ -77,7 +72,8 @@ public class RectangleElement extends Element {
     /**
      * 默认按元素中心旋转
      *
-     * @param rotate
+     * @param rotate 旋转角度
+     * @return RectangleElement
      */
     public RectangleElement setRotate(@NonNull Integer rotate) {
         super.rotate = rotate;
@@ -87,9 +83,10 @@ public class RectangleElement extends Element {
     /**
      * 设置旋转并设置实际旋转x和y坐标
      *
-     * @param rotate
-     * @param actualRotateX
-     * @param actualRotateY
+     * @param rotate        旋转角度
+     * @param actualRotateX 实际旋转x坐标
+     * @param actualRotateY 实际旋转y坐标
+     * @return RectangleElement
      */
     public RectangleElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
         this.rotate = rotate;

@@ -69,7 +69,8 @@ public class ImageElement extends Element {
     /**
      * 默认按元素中心旋转
      *
-     * @param rotate
+     * @param rotate 旋转角度
+     * @return ImageElement
      */
     public ImageElement setRotate(@NonNull Integer rotate) {
         super.rotate = rotate;
@@ -79,9 +80,10 @@ public class ImageElement extends Element {
     /**
      * 设置旋转并设置实际旋转x和y坐标
      *
-     * @param rotate
-     * @param actualRotateX
-     * @param actualRotateY
+     * @param rotate        旋转角度
+     * @param actualRotateX 实际旋转x坐标
+     * @param actualRotateY 实际旋转y坐标
+     * @return ImageElement
      */
     public ImageElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
         this.rotate = rotate;

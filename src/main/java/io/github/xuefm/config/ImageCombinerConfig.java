@@ -17,7 +17,6 @@ public class ImageCombinerConfig {
      */
     private static final Map<Class<? extends Element>, IPainter> painterMap = new ConcurrentHashMap<>();
 
-
     static {
         painterMap.put(ImageElement.class, new DefaultImagePainter());
         painterMap.put(TextElement.class, new DefaultITextPainter());
@@ -26,20 +25,20 @@ public class ImageCombinerConfig {
     }
 
     /**
-     * 添加Painter
+     * 为Element添加Painter
      *
      * @param elementClass Element子类
      * @param painter      不能为null
      */
     public static void setPainter(Class<? extends Element> elementClass, IPainter painter) {
         if (painter == null)
-            throw new ImageBuildException("PAINTER CANNOT BE EMPTY");
+            throw new ImageBuildException("painter不能为null");
         painterMap.put(elementClass, painter);
 
     }
 
     /**
-     * 获取Painter
+     * 获取element对应的Painter
      *
      * @param element Element子类
      * @return IPainter
@@ -49,7 +48,7 @@ public class ImageCombinerConfig {
         if (painterMap.containsKey(element.getClass())) {
             return painterMap.get(element.getClass());
         } else {
-            throw new ImageBuildException("NO MATCHING PAINTER FOUND,PLEASE USE ImageCombinerConfig.setPainter() METHOD TO ADD MATCHING PAINTER FOR " + element.getClass());
+            throw new ImageBuildException("找不到匹配的IPainter，请使用ImageCombinerConfig.setPainter()方法为" + element.getClass() + "添加IPainter");
         }
     }
 }
