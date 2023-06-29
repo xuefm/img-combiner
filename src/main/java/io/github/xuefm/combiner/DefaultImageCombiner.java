@@ -97,7 +97,9 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
             ImageWriter writer = ImageIO.getImageWritersBySuffix(canvasProperty.outputFormat.getName()).next();
             // 创建 ImageWriteParam 对象，并设置压缩质量
             ImageWriteParam param = writer.getDefaultWriteParam();
-            if (param.canWriteCompressed()) {
+            if (param.canWriteCompressed()
+                    && canvasProperty.outputFormat != OutputFormat.BMP
+            ) {
                 param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
                 param.setCompressionQuality(canvasProperty.quality);
             }
@@ -120,7 +122,9 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
         if (combinedImage != null) {
             ImageWriter writer = ImageIO.getImageWritersBySuffix(canvasProperty.outputFormat.getName()).next();
             ImageWriteParam param = writer.getDefaultWriteParam();
-            if (param.canWriteCompressed()) {
+            if (param.canWriteCompressed()
+                    && canvasProperty.outputFormat != OutputFormat.BMP
+            ) {
                 param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
                 param.setCompressionQuality(canvasProperty.quality);
             }

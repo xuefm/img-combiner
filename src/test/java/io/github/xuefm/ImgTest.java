@@ -19,6 +19,7 @@ public class ImgTest {
 
     private static String filePath = "file:///" + System.getProperty("user.dir") + "/test_file/";
     private static String generateFilePath = System.getProperty("user.dir") + "/test_file/generate/";
+    private static OutputFormat outputFormat = OutputFormat.PNG;
 
 
     @BeforeClass
@@ -42,7 +43,7 @@ public class ImgTest {
      */
     @Test
     public void t01ImgTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.LEFT, 0, 100, 100)
                         .setRoundCorner(50)
@@ -58,7 +59,7 @@ public class ImgTest {
                         .setAlpha(0.75f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "图片01" + "_t01ImgTest.png");
+        imageCombiner.save(generateFilePath + "图片01" + "_t01ImgTest." + outputFormat.getName());
     }
 
     /**
@@ -68,7 +69,7 @@ public class ImgTest {
      */
     @Test
     public void t02ImgTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.TOP, 100, 100)
                         .setRoundCorner(50)
@@ -84,7 +85,7 @@ public class ImgTest {
                         .setAlpha(0.75f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "图片02" + "_t02ImgTest.png");
+        imageCombiner.save(generateFilePath + "图片02" + "_t02ImgTest." + outputFormat.getName());
     }
 
     /**
@@ -94,7 +95,7 @@ public class ImgTest {
      */
     @Test
     public void t01RectangleTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 RectangleElement.of(AlignType.TransverseAlign.LEFT, 0, 100, 100)
                         .setRoundCorner(50)
@@ -114,7 +115,7 @@ public class ImgTest {
                         .setColor(Color.BLUE)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "矩形01" + "_t02RectangleTest.png");
+        imageCombiner.save(generateFilePath + "矩形01" + "_t02RectangleTest." + outputFormat.getName());
     }
 
     /**
@@ -124,7 +125,7 @@ public class ImgTest {
      */
     @Test
     public void t02RectangleTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 RectangleElement.of(0, AlignType.VerticalAlign.TOP, 100, 100)
                         .setRoundCorner(50)
@@ -143,12 +144,12 @@ public class ImgTest {
                         .setColor(Color.BLUE)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "矩形02" + "_t02RectangleTest.png");
+        imageCombiner.save(generateFilePath + "矩形02" + "_t02RectangleTest." + outputFormat.getName());
     }
 
     @Test
     public void t01TextTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 TextElement.of("汉字文本：你好世界", 0, 0).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.CYAN)
@@ -158,12 +159,12 @@ public class ImgTest {
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本01" + "_t01TextTest.png");
+        imageCombiner.save(generateFilePath + "文本01" + "_t01TextTest." + outputFormat.getName());
     }
 
     @Test
     public void t02TextTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 TextElement.of("汉字文本：你好世界", AlignType.TransverseAlign.CENTER, 0).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.CYAN)
@@ -173,12 +174,12 @@ public class ImgTest {
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本02" + "_t02TextTest.png");
+        imageCombiner.save(generateFilePath + "文本02" + "_t02TextTest." + outputFormat.getName());
     }
 
     @Test
     public void t03TextTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 TextElement.of("汉字文本：你好世界", 0, AlignType.VerticalAlign.TOP).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.CYAN)
@@ -188,12 +189,12 @@ public class ImgTest {
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本03" + "_t03TextTest.png");
+        imageCombiner.save(generateFilePath + "文本03" + "_t03TextTest." + outputFormat.getName());
     }
 
     @Test
     public void t01MixingTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, OutputFormat.PNG, 0, 0f);
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
 
                 ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.TOP, 100, 100)
@@ -215,10 +216,8 @@ public class ImgTest {
                         .setUnderline(true)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "混合01" + "_t01MixingTest.png");
+        imageCombiner.save(generateFilePath + "混合01" + "_t01MixingTest." + outputFormat.getName());
     }
-
-
 
 
 }
