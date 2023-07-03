@@ -6,6 +6,9 @@ package io.github.xuefm.enums;
 public class AlignType {
 
 
+    /**
+     * 横向对齐方式
+     */
     public enum TransverseAlign {
 
         /**
@@ -26,6 +29,9 @@ public class AlignType {
 
     }
 
+    /**
+     * 纵向对齐方式
+     */
     public enum VerticalAlign {
         /**
          * 顶部对齐
