@@ -21,6 +21,16 @@ public class DefaultLinePainter implements IPainter {
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
         }
+        //处理旋转
+        if (lineElement.getRotate() != null) {
+            if (Objects.isNull(lineElement.getActualRotateX()) || Objects.isNull(lineElement.getActualRotateY())) {
+                lineElement.setRotate(lineElement.getRotate(),
+                        lineElement.getActualX(),
+                        lineElement.getActualY()
+                );
+            }
+            g2d.rotate(Math.toRadians(lineElement.getRotate()), lineElement.getActualRotateX(), lineElement.getActualRotateY());
+        }
     }
 
     @Override
@@ -31,6 +41,11 @@ public class DefaultLinePainter implements IPainter {
 
     @Override
     public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+        LineElement lineElement = (LineElement) element;
+        //绘制完后反向旋转，以免影响后续元素
+        if (lineElement.getRotate() != null) {
+            g2d.rotate(-Math.toRadians(lineElement.getRotate()), lineElement.getActualRotateX(), lineElement.getActualRotateY());
+        }
         //绘制完后重新设置透明度，以免影响后续元素
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
