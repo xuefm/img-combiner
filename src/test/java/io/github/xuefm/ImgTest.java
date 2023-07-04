@@ -303,7 +303,7 @@ public class ImgTest {
         );
 
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "时钟01" + "_clockTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "时钟02" + "_clockTest." + outputFormat.getName());
 
     }
 }
