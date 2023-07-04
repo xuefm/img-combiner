@@ -195,6 +195,24 @@ public class ImgTest {
     }
 
     @Test
+    public void t01lineTest() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
+
+        imageCombiner.addElement(
+                LineElement.of(200, 300, 200, 400)
+                        .setColor(Color.RED)
+        );
+        imageCombiner.addElement(
+                LineElement.of(200, 300, 200, 400)
+                        .setColor(Color.RED)
+                        .setRotate(90)
+        );
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "线01" + "_t01lineTest." + outputFormat.getName());
+    }
+
+    @Test
     public void t01MixingTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
@@ -274,21 +292,12 @@ public class ImgTest {
                         .setAlpha(0.35f)
         );
 
-        imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "时钟01" + "_clockTest." + outputFormat.getName());
-
-    }
-
-    @Test
-    public void clockTest2() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
-
         imageCombiner.addElement(
-                LineElement.of(200, 300, 200, 400)
+                LineElement.of(200, 500, 200, 600)
                         .setColor(Color.RED)
         );
         imageCombiner.addElement(
-                LineElement.of(200, 300, 200, 400)
+                LineElement.of(200, 500, 200, 600)
                         .setColor(Color.RED)
                         .setRotate(90)
         );
