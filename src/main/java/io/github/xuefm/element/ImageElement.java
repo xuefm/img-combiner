@@ -56,9 +56,9 @@ public class ImageElement extends Element {
         return this;
     }
 
-    public ImageElement setAlpha(float alpha) {
-        super.alpha = alpha;
-        return this;
+    private ImageElement(BufferedImage image, int x, int y) {
+        super(x, y);
+        this.image = image;
     }
 
     public void setActualXAndY(Integer actualX, Integer actualY) {
@@ -186,46 +186,234 @@ public class ImageElement extends Element {
 
     }
 
-    private ImageElement(BufferedImage image, int x, int y) {
-        super(x, y);
+    private ImageElement(BufferedImage image, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        super(transverseAlign, verticalAlign);
         this.image = image;
     }
 
+    private ImageElement(BufferedImage image, int x, AlignType.VerticalAlign verticalAlign) {
+        super(x, verticalAlign);
+        this.image = image;
+    }
 
+    private ImageElement(BufferedImage image, AlignType.TransverseAlign transverseAlign, int y) {
+        super(transverseAlign, y);
+        this.image = image;
+    }
+
+    private ImageElement(BufferedImage image, int x, int y, Integer width, Integer height) {
+        super(x, y);
+        this.image = image;
+        this.width = width;
+        this.height = height;
+    }
+
+    private ImageElement(BufferedImage image, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        super(transverseAlign, verticalAlign);
+        this.image = image;
+        this.width = width;
+        this.height = height;
+    }
+
+    private ImageElement(BufferedImage image, AlignType.TransverseAlign transverseAlign, int y, Integer width, Integer height) {
+        super(transverseAlign, y);
+        this.image = image;
+        this.width = width;
+        this.height = height;
+    }
+
+    private ImageElement(BufferedImage image, int x, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        super(x, verticalAlign);
+        this.image = image;
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * @param imgUrl 图片url
+     * @param x      x坐标
+     * @param y      y坐标
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, int x, int y) {
         return new ImageElement(imgUrl, x, y);
     }
 
+    /**
+     * @param imgUrl          图片url
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
         return new ImageElement(imgUrl, transverseAlign, verticalAlign);
     }
 
+    /**
+     * @param imgUrl        图片url
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, int x, AlignType.VerticalAlign verticalAlign) {
         return new ImageElement(imgUrl, x, verticalAlign);
     }
 
+    /**
+     * @param imgUrl          图片url
+     * @param transverseAlign 横向对齐方式
+     * @param y               y坐标
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, int y) {
         return new ImageElement(imgUrl, transverseAlign, y);
     }
 
+    /**
+     * @param imgUrl 图片url
+     * @param x      x坐标
+     * @param y      y坐标
+     * @param width  指定宽度
+     * @param height 指定高度
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, int x, int y, Integer width, Integer height) {
         return new ImageElement(imgUrl, x, y, width, height);
     }
 
+    /**
+     * @param imgUrl          图片url
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
         return new ImageElement(imgUrl, transverseAlign, verticalAlign, width, height);
     }
 
+    /**
+     * @param imgUrl          图片url
+     * @param transverseAlign 横向对齐方式
+     * @param y               y坐标
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, int y, Integer width, Integer height) {
         return new ImageElement(imgUrl, transverseAlign, y, width, height);
     }
 
+    /**
+     * @param imgUrl        图片url
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @param width         指定宽度
+     * @param height        指定高度
+     * @return ImageElement
+     */
     public static ImageElement of(String imgUrl, int x, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
         return new ImageElement(imgUrl, x, verticalAlign, width, height);
     }
 
+    /**
+     * @param image BufferedImage
+     * @param x     x坐标
+     * @param y     y坐标
+     * @return ImageElement
+     */
     public static ImageElement of(BufferedImage image, int x, int y) {
         return new ImageElement(image, x, y);
+    }
+
+    /**
+     * @param image           BufferedImage
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new ImageElement(image, transverseAlign, verticalAlign);
+    }
+
+    /**
+     * @param image         BufferedImage
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, int x, AlignType.VerticalAlign verticalAlign) {
+        return new ImageElement(image, x, verticalAlign);
+    }
+
+    /**
+     * @param image           BufferedImage
+     * @param transverseAlign 横向对齐方式
+     * @param y               y坐标
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, AlignType.TransverseAlign transverseAlign, int y) {
+        return new ImageElement(image, transverseAlign, y);
+    }
+
+    /**
+     * @param image  BufferedImage
+     * @param x      x坐标
+     * @param y      y坐标
+     * @param width  指定宽度
+     * @param height 指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, int x, int y, Integer width, Integer height) {
+        return new ImageElement(image, x, y, width, height);
+    }
+
+    /**
+     * @param image           BufferedImage
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(image, transverseAlign, verticalAlign, width, height);
+    }
+
+    /**
+     * @param image           BufferedImage
+     * @param transverseAlign 横向对齐方式
+     * @param y               y坐标
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, AlignType.TransverseAlign transverseAlign, int y, Integer width, Integer height) {
+        return new ImageElement(image, transverseAlign, y, width, height);
+    }
+
+    /**
+     * @param image         BufferedImage
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @param width         指定宽度
+     * @param height        指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, int x, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(image, x, verticalAlign, width, height);
+    }
+
+    /**
+     * 设置透明度
+     *
+     * @param alpha 透明度，取值范围为0~1，值越小越透明
+     * @return ImageElement
+     */
+    public ImageElement setAlpha(float alpha) {
+        super.alpha = alpha;
+        return this;
     }
 
 

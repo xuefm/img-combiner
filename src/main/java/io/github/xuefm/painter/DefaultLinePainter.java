@@ -25,8 +25,8 @@ public class DefaultLinePainter implements IPainter {
         if (lineElement.getRotate() != null) {
             if (Objects.isNull(lineElement.getActualRotateX()) || Objects.isNull(lineElement.getActualRotateY())) {
                 lineElement.setRotate(lineElement.getRotate(),
-                        lineElement.getActualX(),
-                        lineElement.getActualY()
+                        (lineElement.getX() + lineElement.getX2()) / 2,
+                        (lineElement.getY() + lineElement.getY2()) / 2
                 );
             }
             g2d.rotate(Math.toRadians(lineElement.getRotate()), lineElement.getActualRotateX(), lineElement.getActualRotateY());

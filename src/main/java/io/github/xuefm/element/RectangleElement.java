@@ -148,36 +148,94 @@ public class RectangleElement extends Element {
         this.height = height;
     }
 
-
+    /**
+     * @param x      x坐标
+     * @param y      有坐标
+     * @param width  宽
+     * @param height 高
+     * @return RectangleElement
+     */
     public static RectangleElement of(int x, int y, int width, int height) {
         return new RectangleElement(x, y, width, height);
     }
 
+    /**
+     * @param transverseAlign 横向对齐方式
+     * @param y               有坐标
+     * @param width           宽
+     * @param height          高
+     * @return RectangleElement
+     */
     public static RectangleElement of(AlignType.TransverseAlign transverseAlign, int y, int width, int height) {
         return new RectangleElement(transverseAlign, y, width, height);
     }
 
+    /**
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @param width         宽
+     * @param height        高
+     * @return RectangleElement
+     */
     public static RectangleElement of(int x, AlignType.VerticalAlign verticalAlign, int width, int height) {
         return new RectangleElement(x, verticalAlign, width, height);
     }
 
+    /**
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           宽
+     * @param height          高
+     * @return RectangleElement
+     */
     public static RectangleElement of(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height) {
         return new RectangleElement(transverseAlign, verticalAlign, width, height);
     }
 
-
+    /**
+     * @param x             x坐标
+     * @param y             有坐标
+     * @param width         宽
+     * @param height        高
+     * @param rectangleType 矩形类型
+     * @return RectangleElement
+     */
     public static RectangleElement of(int x, int y, int width, int height, RectangleType rectangleType) {
         return new RectangleElement(x, y, width, height, rectangleType);
     }
 
+    /**
+     * @param transverseAlign 横向对齐方式
+     * @param y               有坐标
+     * @param width           宽
+     * @param height          高
+     * @param rectangleType   矩形类型
+     * @return RectangleElement
+     */
     public static RectangleElement of(AlignType.TransverseAlign transverseAlign, int y, int width, int height, RectangleType rectangleType) {
         return new RectangleElement(transverseAlign, y, width, height, rectangleType);
     }
 
+    /**
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @param width         宽
+     * @param height        高
+     * @param rectangleType 矩形类型
+     * @return RectangleElement
+     */
     public static RectangleElement of(int x, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
         return new RectangleElement(x, verticalAlign, width, height, rectangleType);
     }
 
+    /**
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           宽
+     * @param height          高
+     * @param rectangleType   矩形类型
+     * @return RectangleElement
+     */
     public static RectangleElement of(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
         return new RectangleElement(transverseAlign, verticalAlign, width, height, rectangleType);
     }

@@ -279,5 +279,22 @@ public class ImgTest {
 
     }
 
+    @Test
+    public void clockTest2() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
 
+        imageCombiner.addElement(
+                LineElement.of(200, 300, 200, 400)
+                        .setColor(Color.RED)
+        );
+        imageCombiner.addElement(
+                LineElement.of(200, 300, 200, 400)
+                        .setColor(Color.RED)
+                        .setRotate(90)
+        );
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "时钟01" + "_clockTest." + outputFormat.getName());
+
+    }
 }

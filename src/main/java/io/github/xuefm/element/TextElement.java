@@ -82,22 +82,6 @@ public class TextElement extends Element {
     private List<AttributedString> attributedStringList;
 
 
-    private TextElement(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        super(transverseAlign, verticalAlign);
-        this.text = text;
-    }
-
-    private TextElement(String text, AlignType.TransverseAlign transverseAlign, int y) {
-        super(transverseAlign, y);
-        this.text = text;
-    }
-
-    private TextElement(String text, int x, AlignType.VerticalAlign verticalAlign) {
-        super(x, verticalAlign);
-        this.text = text;
-    }
-
-
     public TextElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
         super.transverseAlign = transverseAlign;
         return this;
@@ -108,27 +92,11 @@ public class TextElement extends Element {
         return this;
     }
 
-    public TextElement setAlpha(float alpha) {
-        super.alpha = alpha;
-        return this;
-    }
-
-    public static TextElement of(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        return new TextElement(text, transverseAlign, verticalAlign);
-    }
-
-    public static TextElement of(String text, AlignType.TransverseAlign transverseAlign, int y) {
-        return new TextElement(text, transverseAlign, y);
-    }
-
-    public static TextElement of(String text, int x, AlignType.VerticalAlign verticalAlign) {
-        return new TextElement(text, x, verticalAlign);
-    }
-
     private TextElement(String text, int x, int y) {
         super(x, y);
         this.text = text;
     }
+
 
     public void setWidthAndHeight(int width, int height) {
         this.width = width;
@@ -147,10 +115,6 @@ public class TextElement extends Element {
         this.textHeight = textHeight;
     }
 
-
-    public static TextElement of(String text, int x, int y) {
-        return new TextElement(text, x, y);
-    }
 
     public void setActualXAndY(int actualX, int actualY) {
         super.actualX = actualX;
@@ -193,6 +157,72 @@ public class TextElement extends Element {
     public TextElement setLineFeed(LineWrapType lineWrapType, int lineMax) {
         this.lineWrapType = lineWrapType;
         this.lineMax = lineMax;
+        return this;
+    }
+
+    private TextElement(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        super(transverseAlign, verticalAlign);
+        this.text = text;
+    }
+
+    private TextElement(String text, AlignType.TransverseAlign transverseAlign, int y) {
+        super(transverseAlign, y);
+        this.text = text;
+    }
+
+    private TextElement(String text, int x, AlignType.VerticalAlign verticalAlign) {
+        super(x, verticalAlign);
+        this.text = text;
+    }
+
+    /**
+     * @param text 文本
+     * @param x    x坐标
+     * @param y    y坐标
+     * @return TextElement
+     */
+    public static TextElement of(String text, int x, int y) {
+        return new TextElement(text, x, y);
+    }
+
+    /**
+     * @param text            文本
+     * @param transverseAlign 横向对齐方式
+     * @param y               y坐标
+     * @return TextElement
+     */
+    public static TextElement of(String text, AlignType.TransverseAlign transverseAlign, int y) {
+        return new TextElement(text, transverseAlign, y);
+    }
+
+    /**
+     * @param text          文本
+     * @param x             x坐标
+     * @param verticalAlign 纵向对齐方式
+     * @return TextElement
+     */
+    public static TextElement of(String text, int x, AlignType.VerticalAlign verticalAlign) {
+        return new TextElement(text, x, verticalAlign);
+    }
+
+    /**
+     * @param text            文本
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @return TextElement
+     */
+    public static TextElement of(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new TextElement(text, transverseAlign, verticalAlign);
+    }
+
+    /**
+     * 设置透明度
+     *
+     * @param alpha 透明度，取值范围为0~1，值越小越透明
+     * @return TextElement
+     */
+    public TextElement setAlpha(float alpha) {
+        super.alpha = alpha;
         return this;
     }
 
