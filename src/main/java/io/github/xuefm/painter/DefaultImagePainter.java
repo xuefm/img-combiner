@@ -45,7 +45,7 @@ public class DefaultImagePainter implements IPainter {
         //处理透明
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, element.getAlpha()));
         //处理旋转
-        if (imageElement.getRotate() != null) {
+        if (Objects.nonNull(imageElement.getRotate())) {
             if (Objects.isNull(imageElement.getActualRotateX()) || Objects.isNull(imageElement.getActualRotateY())) {
                 imageElement.setRotate(imageElement.getRotate(),
                         imageElement.getActualX() + imageElement.getWidth() / 2,
