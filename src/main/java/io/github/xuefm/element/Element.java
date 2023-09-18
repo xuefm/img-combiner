@@ -4,6 +4,7 @@ package io.github.xuefm.element;
 import io.github.xuefm.enums.AlignType;
 import lombok.Getter;
 
+import java.util.Objects;
 
 /**
  * 抽象元素
@@ -15,12 +16,12 @@ public abstract class Element {
     /**
      * 起始坐标x，相对左上角
      */
-    protected int x;
+    protected int x = 0;
 
     /**
      * 起始坐标y，相对左上角
      */
-    protected int y;
+    protected int y = 0;
 
     /**
      * 横向对齐方式(默认左对齐)
@@ -64,26 +65,15 @@ public abstract class Element {
      */
     protected Integer actualRotateY;
 
-
-    protected Element(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    protected Element(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        this.transverseAlign = transverseAlign;
-        this.verticalAlign = verticalAlign;
-    }
-
-    protected Element(AlignType.TransverseAlign transverseAlign, int y) {
-        this.transverseAlign = transverseAlign;
-        this.y = y;
-
-    }
-
-    protected Element(int x, AlignType.VerticalAlign verticalAlign) {
-        this.x = x;
-        this.verticalAlign = verticalAlign;
+    protected Element(Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        if (Objects.nonNull(x))
+            this.x = x;
+        if (Objects.nonNull(y))
+            this.y = y;
+        if (Objects.nonNull(transverseAlign))
+            this.transverseAlign = transverseAlign;
+        if (Objects.nonNull(verticalAlign))
+            this.verticalAlign = verticalAlign;
     }
 
 

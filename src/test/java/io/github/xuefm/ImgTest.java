@@ -47,15 +47,15 @@ public class ImgTest {
     public void t01ImgTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.LEFT, 0, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, AlignType.TransverseAlign.LEFT, null, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(45)
                         .setAlpha(0.25f),
-                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.CENTER, 0, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, AlignType.TransverseAlign.CENTER, null, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(90)
                         .setAlpha(0.5f),
-                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.RIGHT, 0, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, AlignType.TransverseAlign.RIGHT, null, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(180)
                         .setAlpha(0.75f)
@@ -73,15 +73,15 @@ public class ImgTest {
     public void t02ImgTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.TOP, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, null, AlignType.VerticalAlign.TOP, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(45)
                         .setAlpha(0.25f),
-                ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.CENTER, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, null, AlignType.VerticalAlign.CENTER, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(90)
                         .setAlpha(0.5f),
-                ImageElement.of(filePath + "cat.jpg", 0, AlignType.VerticalAlign.BOTTOM, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, null, AlignType.VerticalAlign.BOTTOM, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(180)
                         .setAlpha(0.75f)
@@ -99,18 +99,18 @@ public class ImgTest {
     public void t01RectangleTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                RectangleElement.of(AlignType.TransverseAlign.LEFT, 0, 100, 100)
+                RectangleElement.of(null, null, AlignType.TransverseAlign.LEFT, null, 0, 100)
                         .setRoundCorner(50)
                         .setRotate(30)
                         .setAlpha(0.25f)
                         .setColor(Color.RED)
                 ,
-                RectangleElement.of(AlignType.TransverseAlign.CENTER, 0, 100, 100)
+                RectangleElement.of(null, null, AlignType.TransverseAlign.CENTER, null, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(60)
                         .setAlpha(0.5f)
                         .setColor(Color.GREEN),
-                RectangleElement.of(AlignType.TransverseAlign.RIGHT, 0, 100, 100)
+                RectangleElement.of(null, null, AlignType.TransverseAlign.RIGHT, null, 0, 100)
                         .setRoundCorner(50)
                         .setRotate(90)
                         .setAlpha(0.75f)
@@ -129,17 +129,17 @@ public class ImgTest {
     public void t02RectangleTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                RectangleElement.of(0, AlignType.VerticalAlign.TOP, 100, 100)
+                RectangleElement.of(0, null, null, AlignType.VerticalAlign.TOP, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(30)
                         .setAlpha(0.25f)
                         .setColor(Color.RED),
-                RectangleElement.of(0, AlignType.VerticalAlign.CENTER, 100, 100)
+                RectangleElement.of(0, null, null, AlignType.VerticalAlign.CENTER, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(60)
                         .setAlpha(0.5f)
                         .setColor(Color.GREEN),
-                RectangleElement.of(0, AlignType.VerticalAlign.BOTTOM, 100, 100)
+                RectangleElement.of(0, null, null, AlignType.VerticalAlign.BOTTOM, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(90)
                         .setAlpha(0.75f)
@@ -153,10 +153,10 @@ public class ImgTest {
     public void t01TextTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                TextElement.of("汉字文本：你好世界", 0, 0).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                TextElement.of("汉字文本：你好世界", 0, 0, null, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3),
-                TextElement.of("English text:Hello world", 0, 200).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                TextElement.of("English text:Hello world", 0, 200, null, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.GREEN)
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
@@ -168,10 +168,10 @@ public class ImgTest {
     public void t02TextTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                TextElement.of("汉字文本：你好世界", AlignType.TransverseAlign.CENTER, 0).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                TextElement.of("汉字文本：你好世界", null, 0, AlignType.TransverseAlign.CENTER, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3),
-                TextElement.of("English text:Hello world", AlignType.TransverseAlign.CENTER, 200).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                TextElement.of("English text:Hello world", null, 200, AlignType.TransverseAlign.CENTER, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.GREEN)
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
@@ -183,10 +183,10 @@ public class ImgTest {
     public void t03TextTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                TextElement.of("汉字文本：你好世界", 0, AlignType.VerticalAlign.TOP).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                TextElement.of("汉字文本：你好世界", 0, null, null, AlignType.VerticalAlign.TOP).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3),
-                TextElement.of("English text:Hello world", 0, AlignType.VerticalAlign.BOTTOM).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                TextElement.of("English text:Hello world", 0, null, null, AlignType.VerticalAlign.BOTTOM).setFont(new Font("微软雅黑", Font.PLAIN, 36))
                         .setColor(Color.GREEN)
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
@@ -217,19 +217,19 @@ public class ImgTest {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
         imageCombiner.addElement(
 
-                ImageElement.of(filePath + "cat.jpg", AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.TOP, 100, 100)
+                ImageElement.of(filePath + "cat.jpg", null, null, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.TOP, 100, 100)
                         .setRoundCorner(50)
                         .setRotate(45),
-                RectangleElement.of(AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 100, 100)
+                RectangleElement.of(null, null, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 100, 100)
                         .setRoundCorner(50)
                         .setColor(Color.RED),
-                TextElement.of("汉字文本：你好世界", AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.BOTTOM).setFont(new Font("微软雅黑", Font.PLAIN, 32))
+                TextElement.of("汉字文本：你好世界", null, null, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.BOTTOM).setFont(new Font("微软雅黑", Font.PLAIN, 32))
                         .setAlpha(1f)
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3)
                         .setStrikethrough(true)
                 ,
-                TextElement.of("汉字文本：你好世界", 0, 0).setFont(new Font("宋体", Font.PLAIN, 32))
+                TextElement.of("汉字文本：你好世界", 0, 0, null, null).setFont(new Font("宋体", Font.PLAIN, 32))
                         .setAlpha(1f)
                         .setColor(Color.CYAN)
                         .setLineFeed(LineWrapType.BY_TEXT_COUNT, 3)
@@ -243,14 +243,14 @@ public class ImgTest {
     public void clockTest() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
         imageCombiner.addElement(
-                TextElement.of("你好啊", AlignType.TransverseAlign.CENTER, 100)
+                TextElement.of("你好啊", null, 100, AlignType.TransverseAlign.CENTER, null)
                         .setColor(new Color(255, 255, 255))
                         .setFont(new Font("宋体", Font.PLAIN, 72))
                         .setAlpha(0.35f)
         );
         //表盘
         imageCombiner.addElement(
-                RectangleElement.of(AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 200)
+                RectangleElement.of(null, null, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 200)
                         .setColor(new Color(30, 31, 34))
                         .setRoundCorner(200)
         );
@@ -286,7 +286,7 @@ public class ImgTest {
                         .setRotate((int) secondAngle, 200, 350)
         );
         imageCombiner.addElement(
-                TextElement.of("你好啊", AlignType.TransverseAlign.CENTER, 600)
+                TextElement.of("你好啊", null, 600, AlignType.TransverseAlign.CENTER, null)
                         .setColor(new Color(255, 255, 255))
                         .setFont(new Font("宋体", Font.PLAIN, 72))
                         .setAlpha(0.35f)
@@ -304,6 +304,16 @@ public class ImgTest {
 
         imageCombiner.generate();
         imageCombiner.save(generateFilePath + "时钟02" + "_clockTest." + outputFormat.getName());
+
+    }
+
+    @Test
+    public void clocsadfsaft() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(632, 666, null, outputFormat, 16, 0f);
+        imageCombiner.addElement(RectangleElement.of(0, 0, null, null, 632, 666).setRoundCorner(16).setColor(Color.WHITE));
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "测试背景" + "_clockTest." + outputFormat.getName());
 
     }
 }

@@ -81,6 +81,21 @@ public class TextElement extends Element {
      */
     private List<AttributedString> attributedStringList;
 
+    private TextElement(String text, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        super(x, y, transverseAlign, verticalAlign);
+        this.text = text;
+    }
+
+    /**
+     * @param text 文本
+     * @param x    x坐标
+     * @param y    y坐标
+     * @return TextElement
+     */
+    public static TextElement of(String text, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new TextElement(text, x, y, transverseAlign, verticalAlign);
+    }
+
 
     public TextElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
         super.transverseAlign = transverseAlign;
@@ -92,15 +107,9 @@ public class TextElement extends Element {
         return this;
     }
 
-    private TextElement(String text, int x, int y) {
-        super(x, y);
-        this.text = text;
-    }
-
-
-    public void setWidthAndHeight(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public TextElement setX(int x) {
+        super.x = x;
+        return this;
     }
 
     public void setTextList(List<String> textList) {
@@ -121,14 +130,19 @@ public class TextElement extends Element {
         super.actualY = actualY;
     }
 
+    public TextElement setY(int y) {
+        super.y = y;
+        return this;
+    }
+
     /**
-     * 默认按元素中心旋转
+     * 设置透明度
      *
-     * @param rotate 旋转角度
+     * @param alpha 透明度，取值范围为0~1，值越小越透明
      * @return TextElement
      */
-    public TextElement setRotate(int rotate) {
-        super.rotate = rotate;
+    public TextElement setAlpha(float alpha) {
+        super.alpha = alpha;
         return this;
     }
 
@@ -160,69 +174,25 @@ public class TextElement extends Element {
         return this;
     }
 
-    private TextElement(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        super(transverseAlign, verticalAlign);
-        this.text = text;
-    }
-
-    private TextElement(String text, AlignType.TransverseAlign transverseAlign, int y) {
-        super(transverseAlign, y);
-        this.text = text;
-    }
-
-    private TextElement(String text, int x, AlignType.VerticalAlign verticalAlign) {
-        super(x, verticalAlign);
-        this.text = text;
-    }
-
     /**
-     * @param text 文本
-     * @param x    x坐标
-     * @param y    y坐标
-     * @return TextElement
-     */
-    public static TextElement of(String text, int x, int y) {
-        return new TextElement(text, x, y);
-    }
-
-    /**
-     * @param text            文本
-     * @param transverseAlign 横向对齐方式
-     * @param y               y坐标
-     * @return TextElement
-     */
-    public static TextElement of(String text, AlignType.TransverseAlign transverseAlign, int y) {
-        return new TextElement(text, transverseAlign, y);
-    }
-
-    /**
-     * @param text          文本
-     * @param x             x坐标
-     * @param verticalAlign 纵向对齐方式
-     * @return TextElement
-     */
-    public static TextElement of(String text, int x, AlignType.VerticalAlign verticalAlign) {
-        return new TextElement(text, x, verticalAlign);
-    }
-
-    /**
-     * @param text            文本
-     * @param transverseAlign 横向对齐方式
-     * @param verticalAlign   纵向对齐方式
-     * @return TextElement
-     */
-    public static TextElement of(String text, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        return new TextElement(text, transverseAlign, verticalAlign);
-    }
-
-    /**
-     * 设置透明度
+     * 设置宽和高
      *
-     * @param alpha 透明度，取值范围为0~1，值越小越透明
+     * @param width  宽
+     * @param height 高
+     */
+    public void setWidthAndHeight(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * 设置旋转 默认按元素中心旋转
+     *
+     * @param rotate 旋转角度
      * @return TextElement
      */
-    public TextElement setAlpha(float alpha) {
-        super.alpha = alpha;
+    public TextElement setRotate(int rotate) {
+        super.rotate = rotate;
         return this;
     }
 

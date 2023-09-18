@@ -20,13 +20,11 @@ public class RectangleElement extends Element {
     /**
      * 绘制宽度
      */
-    @Setter
     private Integer width;
 
     /**
      * 绘制高度
      */
-    @Setter
     private Integer height;
 
     /**
@@ -95,148 +93,25 @@ public class RectangleElement extends Element {
         return this;
     }
 
-
-    private RectangleElement(AlignType.TransverseAlign transverseAlign, int y, int width, int height, RectangleType rectangleType) {
-        super(transverseAlign, y);
-        this.width = width;
-        this.height = height;
-        this.rectangleType = rectangleType;
+    private RectangleElement(Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        super(x, y, transverseAlign, verticalAlign);
     }
 
-    private RectangleElement(int x, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
-        super(x, verticalAlign);
-        this.width = width;
-        this.height = height;
-        this.rectangleType = rectangleType;
-    }
-
-    private RectangleElement(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
-        super(transverseAlign, verticalAlign);
-        this.width = width;
-        this.height = height;
-        this.rectangleType = rectangleType;
-    }
-
-    private RectangleElement(int x, int y, int width, int height, RectangleType rectangleType) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
-        this.rectangleType = rectangleType;
-    }
-
-    private RectangleElement(int x, int y, int width, int height) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
-    }
-
-    private RectangleElement(AlignType.TransverseAlign transverseAlign, int y, int width, int height) {
-        super(transverseAlign, y);
-        this.width = width;
-        this.height = height;
-    }
-
-    private RectangleElement(int x, AlignType.VerticalAlign verticalAlign, int width, int height) {
-        super(x, verticalAlign);
-        this.width = width;
-        this.height = height;
-    }
-
-    private RectangleElement(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height) {
-        super(transverseAlign, verticalAlign);
-        this.width = width;
-        this.height = height;
+    public static RectangleElement of(Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height) {
+        return new RectangleElement(x, y, transverseAlign, verticalAlign)
+                .setWidthAndHeight(width, height);
     }
 
     /**
-     * @param x      x坐标
-     * @param y      有坐标
+     * 设置宽和高
+     *
      * @param width  宽
      * @param height 高
      * @return RectangleElement
      */
-    public static RectangleElement of(int x, int y, int width, int height) {
-        return new RectangleElement(x, y, width, height);
-    }
-
-    /**
-     * @param transverseAlign 横向对齐方式
-     * @param y               有坐标
-     * @param width           宽
-     * @param height          高
-     * @return RectangleElement
-     */
-    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, int y, int width, int height) {
-        return new RectangleElement(transverseAlign, y, width, height);
-    }
-
-    /**
-     * @param x             x坐标
-     * @param verticalAlign 纵向对齐方式
-     * @param width         宽
-     * @param height        高
-     * @return RectangleElement
-     */
-    public static RectangleElement of(int x, AlignType.VerticalAlign verticalAlign, int width, int height) {
-        return new RectangleElement(x, verticalAlign, width, height);
-    }
-
-    /**
-     * @param transverseAlign 横向对齐方式
-     * @param verticalAlign   纵向对齐方式
-     * @param width           宽
-     * @param height          高
-     * @return RectangleElement
-     */
-    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height) {
-        return new RectangleElement(transverseAlign, verticalAlign, width, height);
-    }
-
-    /**
-     * @param x             x坐标
-     * @param y             有坐标
-     * @param width         宽
-     * @param height        高
-     * @param rectangleType 矩形类型
-     * @return RectangleElement
-     */
-    public static RectangleElement of(int x, int y, int width, int height, RectangleType rectangleType) {
-        return new RectangleElement(x, y, width, height, rectangleType);
-    }
-
-    /**
-     * @param transverseAlign 横向对齐方式
-     * @param y               有坐标
-     * @param width           宽
-     * @param height          高
-     * @param rectangleType   矩形类型
-     * @return RectangleElement
-     */
-    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, int y, int width, int height, RectangleType rectangleType) {
-        return new RectangleElement(transverseAlign, y, width, height, rectangleType);
-    }
-
-    /**
-     * @param x             x坐标
-     * @param verticalAlign 纵向对齐方式
-     * @param width         宽
-     * @param height        高
-     * @param rectangleType 矩形类型
-     * @return RectangleElement
-     */
-    public static RectangleElement of(int x, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
-        return new RectangleElement(x, verticalAlign, width, height, rectangleType);
-    }
-
-    /**
-     * @param transverseAlign 横向对齐方式
-     * @param verticalAlign   纵向对齐方式
-     * @param width           宽
-     * @param height          高
-     * @param rectangleType   矩形类型
-     * @return RectangleElement
-     */
-    public static RectangleElement of(AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, int width, int height, RectangleType rectangleType) {
-        return new RectangleElement(transverseAlign, verticalAlign, width, height, rectangleType);
+    public RectangleElement setWidthAndHeight(int width, int height) {
+        this.width = width;
+        this.height = height;
+        return this;
     }
 }

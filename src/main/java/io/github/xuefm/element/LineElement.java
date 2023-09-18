@@ -70,7 +70,7 @@ public class LineElement extends Element {
 
 
     private LineElement(int x, int y, int x2, int y2) {
-        super(x, y);
+        super(x, y, null, null);
         this.x2 = x2;
         this.y2 = y2;
     }

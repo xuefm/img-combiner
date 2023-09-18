@@ -18,14 +18,6 @@ public class DefaultImagePainter implements IPainter {
     public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         ImageElement imageElement = (ImageElement) element;
 
-        //若未设置宽则使用图片原始宽
-        if (Objects.isNull(imageElement.getWidth())) {
-            imageElement.setWidth(imageElement.getImage().getWidth());
-        }
-        //若未设置高则使用图片原始高
-        if (Objects.isNull(imageElement.getHeight())) {
-            imageElement.setHeight(imageElement.getImage().getHeight());
-        }
         //处理对齐方式(计算出实际绘制的x和y坐标)
         int x = 0;
         int y = 0;
