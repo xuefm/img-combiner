@@ -112,8 +112,10 @@ public class TextElement extends Element {
         return this;
     }
 
-    public void setTextList(List<String> textList) {
+    public void setCalculatedValue(List<String> textList, int width, int height) {
         this.textList = textList;
+        this.width = width;
+        this.height = height;
     }
 
     public void setAttributedStringList(List<AttributedString> attributedStringList) {
@@ -174,16 +176,6 @@ public class TextElement extends Element {
         return this;
     }
 
-    /**
-     * 设置宽和高
-     *
-     * @param width  宽
-     * @param height 高
-     */
-    public void setWidthAndHeight(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
 
     /**
      * 设置旋转 默认按元素中心旋转

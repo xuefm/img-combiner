@@ -45,6 +45,38 @@ public class LineElement extends Element {
 
 
     /**
+     * 实际开始坐标x，相对左上角(计算值，请勿手动设置)
+     */
+    private int actualX1;
+
+    /**
+     * 实际开始坐标y，相对左上角(计算值，请勿手动设置)
+     */
+    private int actualY1;
+
+
+    /**
+     * 实际结束坐标x，相对左上角(计算值，请勿手动设置)
+     */
+    private int actualX2;
+
+    /**
+     * 实际结束坐标y，相对左上角(计算值，请勿手动设置)
+     */
+    private int actualY2;
+
+    /**
+     * 绘制宽度(计算值，请勿手动设置)
+     */
+    private Integer width;
+
+    /**
+     * 绘制高度(计算值，请勿手动设置)
+     */
+    private Integer height;
+
+
+    /**
      * 设置透明度
      *
      * @param alpha 透明度，取值范围为0~1，值越小越透明
@@ -52,6 +84,17 @@ public class LineElement extends Element {
      */
     public LineElement setAlpha(float alpha) {
         super.alpha = alpha;
+        return this;
+    }
+
+    /**
+     * 设置选装(默认按元素中心旋转)
+     *
+     * @param rotate 旋转角度
+     * @return LineElement
+     */
+    public LineElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
         return this;
     }
 
@@ -67,6 +110,16 @@ public class LineElement extends Element {
         this.rotate = rotate;
         this.actualRotateX = actualRotateX;
         this.actualRotateY = actualRotateY;
+        return this;
+    }
+
+    public LineElement setCalculatedValue(int actualX1, int actualY1, int actualX2, int actualY2, int width, int height) {
+        this.actualX1 = actualX1;
+        this.actualY1 = actualY1;
+        this.actualX2 = actualX2;
+        this.actualY2 = actualY2;
+        this.width = width;
+        this.height = height;
         return this;
     }
 
@@ -100,17 +153,6 @@ public class LineElement extends Element {
      */
     public static LineElement of(int x1, int y1, int x2, int y2, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
         return new LineElement(null, null, x1, y1, x2, y2, transverseAlign, verticalAlign);
-    }
-
-    /**
-     * 设置选装(默认按元素中心旋转)
-     *
-     * @param rotate 旋转角度
-     * @return LineElement
-     */
-    public LineElement setRotate(@NonNull Integer rotate) {
-        super.rotate = rotate;
-        return this;
     }
 
 

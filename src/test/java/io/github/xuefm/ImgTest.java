@@ -244,7 +244,7 @@ public class ImgTest {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
         imageCombiner.addElement(
                 TextElement.of("你好啊", null, 100, AlignType.TransverseAlign.CENTER, null)
-                        .setColor(new Color(255, 255, 255))
+                        .setColor(new Color(0, 255, 255))
                         .setFont(new Font("宋体", Font.PLAIN, 72))
                         .setAlpha(0.35f)
         );
@@ -287,7 +287,7 @@ public class ImgTest {
         );
         imageCombiner.addElement(
                 TextElement.of("你好啊", null, 600, AlignType.TransverseAlign.CENTER, null)
-                        .setColor(new Color(255, 255, 255))
+                        .setColor(new Color(255, 0, 255))
                         .setFont(new Font("宋体", Font.PLAIN, 72))
                         .setAlpha(0.35f)
         );
@@ -307,20 +307,6 @@ public class ImgTest {
 
     }
 
-    @Test
-    public void clocsadfsaft() throws IOException {
-        long l = System.currentTimeMillis();
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(632, 666, outputFormat, 16, 0f);
-        imageCombiner.addElement(ImageElement
-                .of("https://zk-micro.oss-cn-hangzhou.aliyuncs.com/businessCard65082323e4b0c638e37b2f52.png",
-                        -50, 50,
-                        AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER,
-                        570, 324)
-                .setRoundCorner(16));
 
-        imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "测试背景" + "_clockTest." + outputFormat.getName());
-        System.out.println(System.currentTimeMillis() - l);
 
-    }
 }

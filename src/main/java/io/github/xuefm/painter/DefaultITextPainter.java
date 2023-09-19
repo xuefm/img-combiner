@@ -87,7 +87,7 @@ public class DefaultITextPainter implements IPainter {
                     textList.addAll(splitByPixel(textElement.getText(), textElement.getLineMax(), fontMetrics));
             default -> throw new ImageBuildException("换行方式错误");
         }
-        textElement.setTextList(textList);
+
         List<AttributedString> attributedStringList = new ArrayList<>(textList.size());
         for (String s : textList) {
             AttributedString attributedString = new AttributedString(s);
@@ -113,7 +113,7 @@ public class DefaultITextPainter implements IPainter {
                 width = i;
             }
         }
-        textElement.setWidthAndHeight(width, height);
+        textElement.setCalculatedValue(textList, width, height);
 
         //处理对齐方式(计算出实际绘制的x和y坐标)
         int x = 0;
