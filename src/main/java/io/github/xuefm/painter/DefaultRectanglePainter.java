@@ -24,14 +24,16 @@ public class DefaultRectanglePainter implements IPainter {
         int y = 0;
         switch (element.getTransverseAlign()) {
             case LEFT -> x = element.getX();
-            case CENTER -> x = (canvasProperty.getCanvasWidth() - ((RectangleElement) element).getWidth()) / 2;
-            case RIGHT -> x = canvasProperty.getCanvasWidth() - ((RectangleElement) element).getWidth();
+            case CENTER ->
+                    x = element.getX() + (canvasProperty.getCanvasWidth() - ((RectangleElement) element).getWidth()) / 2;
+            case RIGHT ->
+                    x = element.getX() + canvasProperty.getCanvasWidth() - ((RectangleElement) element).getWidth();
             default -> throw new ImageBuildException("对齐方式错误");
         }
         switch (element.getVerticalAlign()) {
             case TOP -> y = element.getY();
-            case CENTER -> y = (canvasProperty.getCanvasHeight() - rectangleElement.getHeight()) / 2;
-            case BOTTOM -> y = canvasProperty.getCanvasHeight() - rectangleElement.getHeight();
+            case CENTER -> y = element.getY() + (canvasProperty.getCanvasHeight() - rectangleElement.getHeight()) / 2;
+            case BOTTOM -> y = element.getY() + canvasProperty.getCanvasHeight() - rectangleElement.getHeight();
             default -> throw new ImageBuildException("对齐方式错误");
         }
         rectangleElement.setActualXAndY(x, y);

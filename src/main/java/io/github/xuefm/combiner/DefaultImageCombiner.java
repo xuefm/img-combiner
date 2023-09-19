@@ -73,6 +73,7 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
         Graphics2D g2d = image.createGraphics();
         //设置抗锯齿
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
         //在图片上绘制背景色
         if (Objects.nonNull(canvasProperty.backgroundColor)) {

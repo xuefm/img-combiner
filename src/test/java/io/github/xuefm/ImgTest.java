@@ -309,11 +309,18 @@ public class ImgTest {
 
     @Test
     public void clocsadfsaft() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(632, 666, null, outputFormat, 16, 0f);
-        imageCombiner.addElement(RectangleElement.of(0, 0, null, null, 632, 666).setRoundCorner(16).setColor(Color.WHITE));
+        long l = System.currentTimeMillis();
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(632, 666, outputFormat, 16, 0f);
+        imageCombiner.addElement(ImageElement
+                .of("https://zk-micro.oss-cn-hangzhou.aliyuncs.com/businessCard65082323e4b0c638e37b2f52.png",
+                        -50, 50,
+                        AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER,
+                        570, 324)
+                .setRoundCorner(16));
 
         imageCombiner.generate();
         imageCombiner.save(generateFilePath + "测试背景" + "_clockTest." + outputFormat.getName());
+        System.out.println(System.currentTimeMillis() - l);
 
     }
 }
