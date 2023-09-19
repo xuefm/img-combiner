@@ -1,5 +1,6 @@
 package io.github.xuefm.element;
 
+import io.github.xuefm.enums.AlignType;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -18,6 +19,17 @@ public class LineElement extends Element {
     /**
      * 结束坐标x，相对左上角
      */
+    private final int x1;
+
+    /**
+     * 结束坐标y，相对左上角
+     */
+    private final int y1;
+
+
+    /**
+     * 结束坐标x，相对左上角
+     */
     private final int x2;
 
     /**
@@ -31,16 +43,6 @@ public class LineElement extends Element {
     @Setter
     private Color color = new Color(0, 0, 0);
 
-    /**
-     * @param x  起始x坐标
-     * @param y  起始y坐标
-     * @param x2 结束x坐标
-     * @param y2 结束y坐标
-     * @return LineElement
-     */
-    public static LineElement of(int x, int y, int x2, int y2) {
-        return new LineElement(x, y, x2, y2);
-    }
 
     /**
      * 设置透明度
@@ -68,11 +70,36 @@ public class LineElement extends Element {
         return this;
     }
 
-
-    private LineElement(int x, int y, int x2, int y2) {
-        super(x, y, null, null);
+    private LineElement(Integer x, Integer y, int x1, int y1, int x2, int y2, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        super(x, y, transverseAlign, verticalAlign);
+        this.x1 = x1;
+        this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
+    }
+
+    /**
+     * @param x1 起始x坐标
+     * @param y1 起始y坐标
+     * @param x2 结束x坐标
+     * @param y2 结束y坐标
+     * @return LineElement
+     */
+    public static LineElement of(int x1, int y1, int x2, int y2) {
+        return new LineElement(null, null, x1, y1, x2, y2, null, null);
+    }
+
+    /**
+     * @param x1              起始x坐标
+     * @param y1              起始y坐标
+     * @param x2              结束x坐标
+     * @param y2              结束y坐标
+     * @param transverseAlign 横向对齐方式(默认左对齐)
+     * @param verticalAlign   纵向对齐方式(默认顶部对齐)
+     * @return LineElement
+     */
+    public static LineElement of(int x1, int y1, int x2, int y2, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new LineElement(null, null, x1, y1, x2, y2, transverseAlign, verticalAlign);
     }
 
     /**

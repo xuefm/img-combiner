@@ -25,8 +25,8 @@ public class DefaultLinePainter implements IPainter {
         if (lineElement.getRotate() != null) {
             if (Objects.isNull(lineElement.getActualRotateX()) || Objects.isNull(lineElement.getActualRotateY())) {
                 lineElement.setRotate(lineElement.getRotate(),
-                        (lineElement.getX() + lineElement.getX2()) / 2,
-                        (lineElement.getY() + lineElement.getY2()) / 2
+                        (lineElement.getX1() + lineElement.getX2()) / 2,
+                        (lineElement.getY1() + lineElement.getY2()) / 2
                 );
             }
             g2d.rotate(Math.toRadians(lineElement.getRotate()), lineElement.getActualRotateX(), lineElement.getActualRotateY());
@@ -36,7 +36,7 @@ public class DefaultLinePainter implements IPainter {
     @Override
     public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         LineElement lineElement = (LineElement) element;
-        g2d.drawLine(lineElement.getX(), lineElement.getY(), lineElement.getX2(), lineElement.getY2());
+        g2d.drawLine(lineElement.getX1(), lineElement.getY1(), lineElement.getX2(), lineElement.getY2());
     }
 
     @Override
