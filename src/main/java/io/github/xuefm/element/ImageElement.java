@@ -44,6 +44,63 @@ public class ImageElement extends Element {
     @Setter
     private Integer roundCorner;
 
+    public ImageElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
+        super.transverseAlign = transverseAlign;
+        return this;
+    }
+
+    public ImageElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
+        super.verticalAlign = verticalAlign;
+        return this;
+    }
+
+    public ImageElement setX(int x) {
+        super.x = x;
+        return this;
+    }
+
+    public ImageElement setY(int y) {
+        super.y = y;
+        return this;
+    }
+
+    /**
+     * 设置透明度
+     *
+     * @param alpha 透明度，取值范围为0~1，值越小越透明
+     * @return ImageElement
+     */
+    public ImageElement setAlpha(float alpha) {
+        super.alpha = alpha;
+        return this;
+    }
+
+    /**
+     * 默认按元素中心旋转
+     *
+     * @param rotate 旋转角度
+     * @return ImageElement
+     */
+    public ImageElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置旋转并设置实际旋转x和y坐标
+     *
+     * @param rotate        旋转角度
+     * @param actualRotateX 实际旋转x坐标
+     * @param actualRotateY 实际旋转y坐标
+     * @return ImageElement
+     */
+    public ImageElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
+        this.rotate = rotate;
+        this.actualRotateX = actualRotateX;
+        this.actualRotateY = actualRotateY;
+        return this;
+    }
+
     private ImageElement(String imgUrl, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
         super(x, y, transverseAlign, verticalAlign);
         this.imgUrl = imgUrl;
@@ -129,63 +186,6 @@ public class ImageElement extends Element {
     public void setActualXAndY(Integer actualX, Integer actualY) {
         super.actualX = actualX;
         super.actualY = actualY;
-    }
-
-    /**
-     * 默认按元素中心旋转
-     *
-     * @param rotate 旋转角度
-     * @return ImageElement
-     */
-    public ImageElement setRotate(@NonNull Integer rotate) {
-        super.rotate = rotate;
-        return this;
-    }
-
-    /**
-     * 设置旋转并设置实际旋转x和y坐标
-     *
-     * @param rotate        旋转角度
-     * @param actualRotateX 实际旋转x坐标
-     * @param actualRotateY 实际旋转y坐标
-     * @return ImageElement
-     */
-    public ImageElement setRotate(@NonNull Integer rotate, @NonNull Integer actualRotateX, @NonNull Integer actualRotateY) {
-        this.rotate = rotate;
-        this.actualRotateX = actualRotateX;
-        this.actualRotateY = actualRotateY;
-        return this;
-    }
-
-    public ImageElement setTransverseAlign(int x) {
-        super.x = x;
-        return this;
-    }
-
-    public ImageElement setVerticalAlign(int y) {
-        super.y = y;
-        return this;
-    }
-
-    public ImageElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
-        super.transverseAlign = transverseAlign;
-        return this;
-    }
-
-    public ImageElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
-        super.verticalAlign = verticalAlign;
-        return this;
-    }
-
-    /**
-     * 设置透明度
-     *
-     * @param alpha 透明度，取值范围为0~1，值越小越透明
-     * @return ImageElement
-     */
-    public ImageElement setAlpha(float alpha) {
-        super.alpha = alpha;
-        return this;
     }
 
     /**

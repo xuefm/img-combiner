@@ -75,6 +75,26 @@ public class LineElement extends Element {
      */
     private Integer height;
 
+    public LineElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
+        super.transverseAlign = transverseAlign;
+        return this;
+    }
+
+    public LineElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
+        super.verticalAlign = verticalAlign;
+        return this;
+    }
+
+    public LineElement setX(int x) {
+        super.x = x;
+        return this;
+    }
+
+    public LineElement setY(int y) {
+        super.y = y;
+        return this;
+    }
+
 
     /**
      * 设置透明度

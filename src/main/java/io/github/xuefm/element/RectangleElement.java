@@ -46,6 +46,16 @@ public class RectangleElement extends Element {
     @Setter
     private Integer roundCorner = 0;
 
+    public RectangleElement setX(int x) {
+        super.x = x;
+        return this;
+    }
+
+    public RectangleElement setY(int y) {
+        super.y = y;
+        return this;
+    }
+
 
     public RectangleElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
         super.transverseAlign = transverseAlign;
@@ -62,10 +72,6 @@ public class RectangleElement extends Element {
         return this;
     }
 
-    public void setActualXAndY(Integer actualX, Integer actualY) {
-        super.actualX = actualX;
-        super.actualY = actualY;
-    }
 
     /**
      * 默认按元素中心旋转
@@ -91,6 +97,11 @@ public class RectangleElement extends Element {
         this.actualRotateX = actualRotateX;
         this.actualRotateY = actualRotateY;
         return this;
+    }
+
+    public void setActualXAndY(Integer actualX, Integer actualY) {
+        super.actualX = actualX;
+        super.actualY = actualY;
     }
 
     private RectangleElement(Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {

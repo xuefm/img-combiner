@@ -112,6 +112,11 @@ public class TextElement extends Element {
         return this;
     }
 
+    public TextElement setY(int y) {
+        super.y = y;
+        return this;
+    }
+
     public void setCalculatedValue(List<String> textList, int width, int height) {
         this.textList = textList;
         this.width = width;
@@ -132,10 +137,6 @@ public class TextElement extends Element {
         super.actualY = actualY;
     }
 
-    public TextElement setY(int y) {
-        super.y = y;
-        return this;
-    }
 
     /**
      * 设置透明度
