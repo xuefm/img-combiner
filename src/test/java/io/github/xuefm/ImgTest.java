@@ -308,5 +308,19 @@ public class ImgTest {
     }
 
 
+    @Test
+    public void line09Test() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
+        imageCombiner.addElement(
+                LineElement.of(100, 100, 100, 100, 200, 200, null, null),
+                LineElement.of(200, 200, 200, 300)
+
+        );
+
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "线对齐方式" + "_line09Test." + outputFormat.getName());
+
+    }
 
 }

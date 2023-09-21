@@ -132,6 +132,8 @@ public class LineElement extends Element {
     }
 
     /**
+     * (使用此方法构建对象请勿再指定对其方式)
+     *
      * @param x1 起始x坐标
      * @param y1 起始y坐标
      * @param x2 结束x坐标
@@ -139,7 +141,7 @@ public class LineElement extends Element {
      * @return LineElement
      */
     public static LineElement of(int x1, int y1, int x2, int y2) {
-        return new LineElement(null, null, x1, y1, x2, y2, null, null);
+        return new LineElement(x1, y1, x1, y1, x2, y2, null, null);
     }
 
     /**
@@ -153,6 +155,21 @@ public class LineElement extends Element {
      */
     public static LineElement of(int x1, int y1, int x2, int y2, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
         return new LineElement(null, null, x1, y1, x2, y2, transverseAlign, verticalAlign);
+    }
+
+    /**
+     * @param x               x坐标
+     * @param y               y坐标
+     * @param x1              起始x坐标(只决定线的趋势,位置由x,y,transverseAlign,verticalAlign决定)
+     * @param y1              起始y坐标(只决定线的趋势,位置由x,y,transverseAlign,verticalAlign决定)
+     * @param x2              结束x坐标(只决定线的趋势,位置由x,y,transverseAlign,verticalAlign决定)
+     * @param y2              结束y坐标(只决定线的趋势,位置由x,y,transverseAlign,verticalAlign决定)
+     * @param transverseAlign 横向对齐方式(默认左对齐)
+     * @param verticalAlign   纵向对齐方式(默认顶部对齐)
+     * @return LineElement
+     */
+    public static LineElement of(int x, int y, int x1, int y1, int x2, int y2, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new LineElement(x, y, x1, y1, x2, y2, transverseAlign, verticalAlign);
     }
 
 
