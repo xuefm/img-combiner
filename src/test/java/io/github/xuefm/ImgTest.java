@@ -321,5 +321,14 @@ public class ImgTest {
     }
 
 
+    @Test
+    public void overall() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 100, 0f);
+
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "画布圆角01" + "canvasFillet." + outputFormat.getName());
+
+    }
 
 }

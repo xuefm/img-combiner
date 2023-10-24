@@ -12,6 +12,7 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.MemoryCacheImageOutputStream;
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -55,6 +56,36 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
         return new DefaultImageCombiner(new ArrayList<>(), canvasWidth, canvasHeight, backgroundColor, outputFormat, roundCorner, quality);
     }
 
+    /**
+     * image添加圆角
+     *
+     * @param image
+     * @param cornerRadius
+     * @return
+     */
+    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = output.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        // 绘制圆角矩形到 BufferedImage 上
+        RoundRectangle2D roundRect = new RoundRectangle2D.Double(0, 0, w, h, cornerRadius, cornerRadius);
+        g2d.setPaint(new Color(0, 0, 0, 0)); // 设置填充颜色为透明色
+        g2d.fill(roundRect);
+
+        // 将 Graphics2D 对象的剪切区域设置为圆角矩形
+        g2d.setClip(roundRect);
+
+        // 将要添加圆角的图片绘制到 BufferedImage 上
+        g2d.drawImage(image, 0, 0, null);
+
+        g2d.dispose();
+        return output;
+    }
+
     @Override
     public ImageCombiner generate() {
 
@@ -86,6 +117,11 @@ public class DefaultImageCombiner extends AbstractImageCombiner {
             instance.draw(g2d, element, canvasProperty);
         }
         g2d.dispose();
+        //处理画布圆角
+        if (Objects.nonNull(this.canvasProperty.roundCorner) && this.canvasProperty.roundCorner > 0) {
+            image = makeRoundedCorner(image, this.canvasProperty.roundCorner);
+
+        }
         combinedImage = image;
         return this;
     }
