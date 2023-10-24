@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * 默认文本画家
  */
-public class DefaultITextPainter implements IPainter {
+public class DefaultITextPainter extends AbstractPainter {
 
     /**
      * 按文本最大长度将目标String拆分为List<String>

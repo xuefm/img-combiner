@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * 默认矩形画家
  */
-public class DefaultRectanglePainter implements IPainter {
+public class DefaultRectanglePainter extends AbstractPainter {
 
     @Override
     public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {

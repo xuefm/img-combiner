@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * 默认线画家
  */
-public class DefaultLinePainter implements IPainter {
+public class DefaultLinePainter extends AbstractPainter {
 
 
     @Override

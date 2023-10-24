@@ -12,10 +12,10 @@ import java.util.Objects;
 /**
  * 默认图片画家
  */
-public class DefaultImagePainter implements IPainter {
+public class DefaultImagePainter extends AbstractPainter {
 
     @Override
-    public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+    void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         ImageElement imageElement = (ImageElement) element;
 
         //处理对齐方式(计算出实际绘制的x和y坐标)
@@ -54,14 +54,14 @@ public class DefaultImagePainter implements IPainter {
     }
 
     @Override
-    public void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+    void doDraw(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         ImageElement imageElement = (ImageElement) element;
         g2d.drawImage(imageElement.getImage(), imageElement.getActualX(), imageElement.getActualY(), imageElement.getWidth(), imageElement.getHeight(), null);
 
     }
 
     @Override
-    public void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
+    void drawAfter(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         ImageElement imageElement = (ImageElement) element;
         //绘制完后反向旋转，以免影响后续元素
         if (imageElement.getRotate() != null) {
