@@ -319,7 +319,7 @@ public class ImgTest {
 
 
     @Test
-    public void overall() throws IOException {
+    public void canvasRoundCorner() throws IOException {
         ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 100, 0f);
 
 
@@ -335,7 +335,7 @@ public class ImgTest {
                 .setColor(Color.RED));
 
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "椭圆" + "canvasFillet." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "椭圆" + "oval1." + outputFormat.getName());
 
     }
 
