@@ -2,10 +2,7 @@ package io.github.xuefm;
 
 import io.github.xuefm.combiner.DefaultImageCombiner;
 import io.github.xuefm.combiner.ImageCombiner;
-import io.github.xuefm.element.ImageElement;
-import io.github.xuefm.element.LineElement;
-import io.github.xuefm.element.RectangleElement;
-import io.github.xuefm.element.TextElement;
+import io.github.xuefm.element.*;
 import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.LineWrapType;
 import io.github.xuefm.enums.OutputFormat;
@@ -330,5 +327,17 @@ public class ImgTest {
         imageCombiner.save(generateFilePath + "画布圆角01" + "canvasFillet." + outputFormat.getName());
 
     }
+
+    @Test
+    public void overall1() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 300, outputFormat, 0, 1f);
+        imageCombiner.addElement(OvalElement.of(0, 0, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 100)
+                .setColor(Color.RED));
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "椭圆" + "canvasFillet." + outputFormat.getName());
+
+    }
+
 
 }

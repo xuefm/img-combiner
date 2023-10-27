@@ -48,7 +48,7 @@ public class DefaultImagePainter extends AbstractPainter {
             g2d.rotate(Math.toRadians(imageElement.getRotate()), imageElement.getActualRotateX(), imageElement.getActualRotateY());
         }
         //处理圆角
-        if (Objects.nonNull(imageElement.getRoundCorner())) {
+        if (Objects.nonNull(imageElement.getRoundCorner()) && imageElement.getRoundCorner() != 0) {
             g2d.setClip(new RoundRectangle2D.Double(imageElement.getActualX(), imageElement.getActualY(), imageElement.getWidth(), imageElement.getHeight(), imageElement.getRoundCorner(), imageElement.getRoundCorner()));
         }
     }
@@ -72,7 +72,7 @@ public class DefaultImagePainter extends AbstractPainter {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
         //处理圆角
-        if (Objects.nonNull(imageElement.getRoundCorner())) {
+        if (Objects.nonNull(imageElement.getRoundCorner()) && imageElement.getRoundCorner() != 0) {
             g2d.setClip(null);
         }
     }

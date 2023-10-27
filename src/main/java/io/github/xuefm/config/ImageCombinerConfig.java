@@ -22,6 +22,7 @@ public class ImageCombinerConfig {
         painterMap.put(TextElement.class, new DefaultITextPainter());
         painterMap.put(LineElement.class, new DefaultLinePainter());
         painterMap.put(RectangleElement.class, new DefaultRectanglePainter());
+        painterMap.put(OvalElement.class, new DefaultOvalPainter());
     }
 
     /**

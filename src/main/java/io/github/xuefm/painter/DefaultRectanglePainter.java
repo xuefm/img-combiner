@@ -51,7 +51,7 @@ public class DefaultRectanglePainter extends AbstractPainter {
         }
 
         //处理圆角
-        if (Objects.nonNull(rectangleElement.getRoundCorner())) {
+        if (Objects.nonNull(rectangleElement.getRoundCorner()) && rectangleElement.getRoundCorner() != 0) {
             g2d.setClip(new RoundRectangle2D.Double(rectangleElement.getActualX(), rectangleElement.getActualY(), rectangleElement.getWidth(), rectangleElement.getHeight(), rectangleElement.getRoundCorner(), rectangleElement.getRoundCorner()));
         }
     }
@@ -92,7 +92,7 @@ public class DefaultRectanglePainter extends AbstractPainter {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
         //处理圆角
-        if (Objects.nonNull(rectangleElement.getRoundCorner())) {
+        if (Objects.nonNull(rectangleElement.getRoundCorner()) && rectangleElement.getRoundCorner() != 0) {
             g2d.setClip(null);
         }
     }
