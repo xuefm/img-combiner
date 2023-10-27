@@ -329,8 +329,8 @@ public class ImgTest {
     }
 
     @Test
-    public void overall1() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 300, outputFormat, 0, 1f);
+    public void oval1() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 300, outputFormat, 0, 0f);
         imageCombiner.addElement(OvalElement.of(0, 0, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 100)
                 .setColor(Color.RED));
 
