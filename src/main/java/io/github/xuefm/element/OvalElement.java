@@ -9,6 +9,9 @@ import lombok.experimental.Accessors;
 
 import java.awt.*;
 
+/**
+ * 椭圆形元素
+ */
 @Getter
 @Accessors(chain = true)
 public class OvalElement extends Element {
