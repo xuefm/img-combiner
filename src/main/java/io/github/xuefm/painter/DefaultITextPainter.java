@@ -7,6 +7,7 @@ import io.github.xuefm.exception.ImageBuildException;
 
 import java.awt.*;
 import java.awt.font.TextAttribute;
+import java.awt.geom.Point2D;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
@@ -147,6 +148,14 @@ public class DefaultITextPainter extends AbstractPainter {
             }
             g2d.rotate(Math.toRadians(textElement.getRotate()), textElement.getActualRotateX(), textElement.getActualRotateY());
         }
+        //处理渐变
+        if (Objects.nonNull(textElement.getColors())) {
+            Point2D start = new Point2D.Float(0, 0);
+            Point2D end = new Point2D.Float(canvasProperty.getCanvasWidth(), canvasProperty.getCanvasHeight());
+            LinearGradientPaint paint = new LinearGradientPaint(start, end, textElement.getFractions(), textElement.getColors());
+            // 设置绘制颜色为渐变
+            g2d.setPaint(paint);
+        }
     }
 
     @Override
@@ -173,6 +182,7 @@ public class DefaultITextPainter extends AbstractPainter {
         if (Objects.nonNull(element.getAlpha())) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
+        g2d.setPaint(null);
     }
 
 }

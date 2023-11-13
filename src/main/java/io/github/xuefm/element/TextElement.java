@@ -2,6 +2,7 @@ package io.github.xuefm.element;
 
 import io.github.xuefm.enums.AlignType;
 import io.github.xuefm.enums.LineWrapType;
+import io.github.xuefm.exception.ImageBuildException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -56,6 +57,15 @@ public class TextElement extends Element {
      */
     @Setter
     private boolean strikethrough;
+
+    /**
+     * 渐变颜色数组 (如:{Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE})
+     */
+    Color[] colors;
+    /**
+     * 渐变比率数组  (如:{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 1.0f})
+     */
+    float[] fractions;
 
     /**
      * 行高(计算值，请勿手动设置)
@@ -186,6 +196,22 @@ public class TextElement extends Element {
      */
     public TextElement setRotate(int rotate) {
         super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置渐变
+     *
+     * @param colors    渐变颜色数组
+     * @param fractions 渐变比率数组
+     * @return TextElement
+     */
+    public TextElement setGradient(Color[] colors, float[] fractions) {
+        if (colors.length != fractions.length) {
+            throw new ImageBuildException("Colors[]和float[]长度必须相同");
+        }
+        this.colors = colors;
+        this.fractions = fractions;
         return this;
     }
 
