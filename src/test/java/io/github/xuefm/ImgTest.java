@@ -9,12 +9,7 @@ import io.github.xuefm.enums.OutputFormat;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -196,49 +191,6 @@ public class ImgTest {
         imageCombiner.save(generateFilePath + "文本03" + "_t03TextTest." + outputFormat.getName());
     }
 
-    public static void main(String[] args) {
-        // 创建字体对象
-        Font font = new Font("微软雅黑", Font.PLAIN, 24);
-
-        // 创建绘图环境
-        BufferedImage image = new BufferedImage(400, 200, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = image.createGraphics();
-        g2d.setColor(Color.white);
-        g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
-
-        // 设置绘制颜色
-        g2d.setColor(Color.BLACK);
-        // 创建FontRenderContext对象
-        FontRenderContext frc = g2d.getFontRenderContext();
-
-
-        // 创建线性渐变
-        Point2D start = new Point2D.Float(0, 0);
-        Point2D end = new Point2D.Float(image.getWidth(), image.getHeight());
-        Color[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE};
-        float[] fractions = {0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 1.0f};
-        LinearGradientPaint paint = new LinearGradientPaint(start, end, fractions, colors);
-
-        // 设置绘制颜色为渐变
-        g2d.setPaint(paint);
-
-        // 创建GlyphVector对象
-        GlyphVector gv = font.createGlyphVector(frc, "类好啊赶紧送风管!");
-        // 绘制GlyphVector
-        g2d.drawGlyphVector(gv, 0, 100);
-
-        // 释放资源
-        g2d.dispose();
-
-        // 保存为图片
-        try {
-            File output = new File("glyphvector.png");
-            ImageIO.write(image, "png", output);
-            System.out.println("图像保存成功！");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
     public void t01lineTest() throws IOException {
