@@ -13,13 +13,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 public class ImgTest {
 
@@ -407,116 +405,5 @@ public class ImgTest {
         imageCombiner.save(generateFilePath + "文本04" + "_t04TextTest." + outputFormat.getName());
     }
 
-    @Test
-    public void main1() {
-        int width = 400;  // 图片宽度
-        int height = 300; // 图片高度
-
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        int centerX = width / 2;
-        int centerY = height / 2;
-        int ellipseWidth = 200;  // 椭圆的宽度
-        int ellipseHeight = 100; // 椭圆的高度
-
-        g2d.setColor(Color.RED);
-        g2d.drawOval(centerX - ellipseWidth / 2, centerY - ellipseHeight / 2, ellipseWidth, ellipseHeight);
-//        g2d.drawPolygon();
-//        g2d.drawArc();
-//        g2d.drawGlyphVector();
-//        g2d.drawRenderedImage();
-        g2d.dispose();
-
-        File outputFile = new File("ellipse.png");  // 图片输出路径
-        try {
-            ImageIO.write(image, "png", outputFile);
-            System.out.println("图片已生成！");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void sadf() {
-
-        // 创建字体对象
-        Font font = new Font("微软雅黑", Font.PLAIN, 24);
-
-        // 创建绘图环境
-        BufferedImage image = new BufferedImage(400, 200, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = image.createGraphics();
-
-
-        // 创建FontRenderContext对象
-        FontRenderContext frc = g2d.getFontRenderContext();
-
-// 创建GlyphVector对象
-        GlyphVector gv = font.createGlyphVector(frc, "Hello, World!");
-
-// 设置第一个字形的旋转和缩放变换
-        AffineTransform transform = new AffineTransform();
-        transform.rotate(Math.toRadians(0));
-        transform.scale(0.2, 0.2);
-        gv.setGlyphTransform(0, transform);
-
-        AffineTransform transform1 = new AffineTransform();
-        transform1.rotate(Math.toRadians(0));
-        transform1.scale(0.5, 0.5);
-        gv.setGlyphTransform(1, transform1);
-
-// 绘制GlyphVector
-        g2d.drawGlyphVector(gv, 0, 100);
-
-        // 释放资源
-        g2d.dispose();
-
-        // 保存为图片
-        try {
-            File output = new File("glyphvector.png");
-            ImageIO.write(image, "png", output);
-            System.out.println("图像保存成功！");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-
-    @Test
-    public void monkeySort() {
-        int[] arr = {3, 2, 1, 5, 4, 7, 6, 9, 10};
-
-        int i = 0;
-        while (!isSorted(arr)) {
-            shuffleArray(arr);
-            i++;
-        }
-        System.out.println(i);
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-    }
-
-    // 检查数组是否已排序
-    public boolean isSorted(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < arr[i - 1]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // 随机打乱数组
-    public void shuffleArray(int[] arr) {
-        for (int i = arr.length - 1; i > 0; i--) {
-            int index = (int) (Math.random() * (i + 1));
-            int temp = arr[index];
-            arr[index] = arr[i];
-            arr[i] = temp;
-        }
-    }
 
 }
