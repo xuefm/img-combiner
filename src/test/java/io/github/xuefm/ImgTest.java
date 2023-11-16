@@ -35,6 +35,15 @@ public class ImgTest {
         }
     }
 
+    @Test
+    public void canvasRoundCorner() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 100, 0f);
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "画布圆角01." + outputFormat.getName());
+
+    }
+
     /**
      * 图片测试(主要测试横向对齐)
      *
@@ -58,7 +67,7 @@ public class ImgTest {
                         .setAlpha(0.75f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "图片01" + "_t01ImgTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "图片01." + outputFormat.getName());
     }
 
     /**
@@ -84,7 +93,7 @@ public class ImgTest {
                         .setAlpha(0.75f)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "图片02" + "_t02ImgTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "图片02." + outputFormat.getName());
     }
 
     /**
@@ -114,7 +123,7 @@ public class ImgTest {
                         .setColor(Color.BLUE)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "矩形01" + "_t02RectangleTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "矩形01." + outputFormat.getName());
     }
 
     /**
@@ -143,7 +152,7 @@ public class ImgTest {
                         .setColor(Color.BLUE)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "矩形02" + "_t02RectangleTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "矩形02." + outputFormat.getName());
     }
 
     @Test
@@ -158,7 +167,7 @@ public class ImgTest {
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本01" + "_t01TextTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "文本01." + outputFormat.getName());
     }
 
     @Test
@@ -173,7 +182,7 @@ public class ImgTest {
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本02" + "_t02TextTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "文本02." + outputFormat.getName());
     }
 
     @Test
@@ -188,7 +197,42 @@ public class ImgTest {
                         .setLineFeed(LineWrapType.BY_PIXEL, 100)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本03" + "_t03TextTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "文本03." + outputFormat.getName());
+    }
+
+    @Test
+    public void t04TextTest() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
+        imageCombiner.addElement(
+                TextElement.of("汉字文本：你好世界English text:Hello world", 0, 0, null, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                        .setColor(Color.CYAN)
+                        .setGradient(new Color[]{Color.RED, Color.GREEN, Color.BLUE},
+                                new float[]{0.0f, 0.1f, 0.5f}),
+                TextElement.of("汉字文本：你好世界English text:Hello world", 0, 200, null, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                        .setColor(Color.CYAN)
+
+
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "文本04." + outputFormat.getName());
+    }
+
+    @Test
+    public void t05TextTest() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
+        imageCombiner.addElement(
+                TextElement.of("静夜思\n" +
+                                "床前明月光，\n" +
+                                "疑是地上霜。\n" +
+                                "举头望明月，\n" +
+                                "低头思故乡。", 0, null, null, AlignType.VerticalAlign.TOP).setFont(new Font("微软雅黑", Font.PLAIN, 36))
+                        .setGradient(new Color[]{Color.RED, Color.GREEN, Color.BLUE},
+                                new float[]{0.0f, 0.1f, 0.5f})
+                        .setLineFeed(LineWrapType.BY_LINE_BREAKS, 0)
+
+        );
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "文本05." + outputFormat.getName());
     }
 
 
@@ -207,7 +251,7 @@ public class ImgTest {
         );
 
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "线01" + "_t01lineTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "线01." + outputFormat.getName());
     }
 
     @Test
@@ -220,7 +264,19 @@ public class ImgTest {
         );
 
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "线02" + "_t02lineTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "线02." + outputFormat.getName());
+    }
+
+
+    @Test
+    public void oval1() throws IOException {
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 300, outputFormat, 0, 0f);
+        imageCombiner.addElement(OvalElement.of(0, 0, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 100)
+                .setColor(Color.RED));
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "椭圆01." + outputFormat.getName());
+
     }
 
     @Test
@@ -247,7 +303,7 @@ public class ImgTest {
                         .setUnderline(true)
         );
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "混合01" + "_t01MixingTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "混合01." + outputFormat.getName());
     }
 
     @Test
@@ -314,47 +370,8 @@ public class ImgTest {
         );
 
         imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "时钟02" + "_clockTest." + outputFormat.getName());
+        imageCombiner.save(generateFilePath + "时钟02." + outputFormat.getName());
 
-    }
-
-
-    @Test
-    public void canvasRoundCorner() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 100, 0f);
-
-
-        imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "画布圆角01" + "canvasFillet." + outputFormat.getName());
-
-    }
-
-    @Test
-    public void oval1() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 300, outputFormat, 0, 0f);
-        imageCombiner.addElement(OvalElement.of(0, 0, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 100)
-                .setColor(Color.RED));
-
-        imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "椭圆" + "oval1." + outputFormat.getName());
-
-    }
-
-    @Test
-    public void t04TextTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 600, outputFormat, 0, 0f);
-        imageCombiner.addElement(
-                TextElement.of("汉字文本：你好世界English text:Hello world", 0, 0, null, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
-                        .setColor(Color.CYAN)
-                        .setGradient(new Color[]{Color.RED, Color.GREEN, Color.BLUE},
-                                new float[]{0.0f, 0.1f, 0.5f}),
-                TextElement.of("汉字文本：你好世界English text:Hello world", 0, 200, null, null).setFont(new Font("微软雅黑", Font.PLAIN, 36))
-                        .setColor(Color.CYAN)
-
-
-        );
-        imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "文本04" + "_t04TextTest." + outputFormat.getName());
     }
 
 

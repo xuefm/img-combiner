@@ -18,5 +18,9 @@ public enum LineWrapType {
     /**
      * 按像素换行
      */
-    BY_PIXEL
+    BY_PIXEL,
+    /**
+     * 按换行符(即\n)
+     */
+    BY_LINE_BREAKS
 }

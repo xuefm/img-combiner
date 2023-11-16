@@ -65,6 +65,17 @@ public class DefaultITextPainter extends AbstractPainter {
         return stringList;
     }
 
+
+    /**
+     * 按指定标记将目标String拆分为List<String>
+     *
+     * @param str
+     * @return
+     */
+    public static List<String> splitByLineBreaks(String str) {
+        return List.of(str.split("\n"));
+    }
+
     @Override
     public void drawBefore(Graphics2D g2d, Element element, AbstractImageCombiner.CanvasProperty canvasProperty) {
         TextElement textElement = (TextElement) element;
@@ -86,6 +97,7 @@ public class DefaultITextPainter extends AbstractPainter {
             case BY_TEXT_COUNT -> textList.addAll(splitByTextCount(textElement.getText(), textElement.getLineMax()));
             case BY_PIXEL ->
                     textList.addAll(splitByPixel(textElement.getText(), textElement.getLineMax(), fontMetrics));
+            case BY_LINE_BREAKS -> textList.addAll(splitByLineBreaks(textElement.getText()));
             default -> throw new ImageBuildException("换行方式错误");
         }
 
