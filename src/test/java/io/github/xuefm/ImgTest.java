@@ -374,5 +374,28 @@ public class ImgTest {
 
     }
 
+    @Test
+    public void t() throws IOException {
+        String text = """
+                静夜思
+                床前明月光，疑是地上霜。
+                举头望明月，低头思故乡。
+                """;
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(800, 700, outputFormat, 0, 0f);
+        imageCombiner.addElement(TextElement.of(text, -100, -100, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER)
+                .setColor(Color.decode("#6967bb"))
+                .setUnderline(true)
+                .setLineFeed(LineWrapType.BY_LINE_BREAKS, 2)
+        );
+        imageCombiner.addElement(LineElement.of(0, 0, 0, 200, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER)
+                .setX(-300)
+                .setColor(Color.decode("#6967bb"))
+        );
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "静夜思." + outputFormat.getName());
+
+    }
+
 
 }

@@ -91,6 +91,13 @@ public class TextElement extends Element {
      */
     private List<AttributedString> attributedStringList;
 
+    /**
+     * @param text            文本
+     * @param x               横向偏移
+     * @param y               纵向偏移
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     */
     private TextElement(String text, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
         super(x, y, transverseAlign, verticalAlign);
         this.text = text;
@@ -98,50 +105,96 @@ public class TextElement extends Element {
 
     /**
      * @param text 文本
-     * @param x    x坐标
-     * @param y    y坐标
+     * @param x    横向偏移
+     * @param y    纵向偏移
      * @return TextElement
      */
     public static TextElement of(String text, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
         return new TextElement(text, x, y, transverseAlign, verticalAlign);
     }
 
-
+    /**
+     * 设置横向对齐方式
+     *
+     * @param transverseAlign 横向对齐方式
+     * @return TextElement
+     */
     public TextElement setTransverseAlign(AlignType.TransverseAlign transverseAlign) {
         super.transverseAlign = transverseAlign;
         return this;
     }
 
+    /**
+     * 设置纵向对齐方式
+     *
+     * @param verticalAlign 纵向对齐方式
+     * @return TextElement
+     */
     public TextElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
         super.verticalAlign = verticalAlign;
         return this;
     }
 
+    /**
+     * 设置横向偏移
+     *
+     * @param x 横向偏移
+     * @return TextElement
+     */
     public TextElement setX(int x) {
         super.x = x;
         return this;
     }
 
+    /**
+     * 设置纵向偏移
+     *
+     * @param y 纵向偏移
+     * @return TextElement
+     */
     public TextElement setY(int y) {
         super.y = y;
         return this;
     }
 
+    /**
+     * 设置计算值
+     *
+     * @param textList 换行处理后的textList(计算值，请勿手动设置)
+     * @param width    绘制宽度(计算值，请勿手动设置)
+     * @param height   绘制高度(计算值，请勿手动设置)
+     */
     public void setCalculatedValue(List<String> textList, int width, int height) {
         this.textList = textList;
         this.width = width;
         this.height = height;
     }
 
+    /**
+     * 设置带属性(字体、下划线、删除线等属性)字符串列表(计算值，请勿手动设置)
+     *
+     * @param attributedStringList 带属性(字体、下划线、删除线等属性)字符串列表(计算值，请勿手动设置)
+     */
     public void setAttributedStringList(List<AttributedString> attributedStringList) {
         this.attributedStringList = attributedStringList;
     }
 
+    /**
+     * 设置行高(计算值，请勿手动设置)
+     *
+     * @param textHeight 行高(计算值，请勿手动设置)
+     */
     public void setTextHeight(int textHeight) {
         this.textHeight = textHeight;
     }
 
 
+    /**
+     * 设置实际x和y坐标
+     *
+     * @param actualX 实际x坐标
+     * @param actualY 实际y坐标
+     */
     public void setActualXAndY(int actualX, int actualY) {
         super.actualX = actualX;
         super.actualY = actualY;

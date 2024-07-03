@@ -14,12 +14,12 @@ import java.util.Objects;
 public abstract class Element {
 
     /**
-     * 起始坐标x，相对左上角
+     * 横向偏移
      */
     protected int x = 0;
 
     /**
-     * 起始坐标y，相对左上角
+     * 纵向偏移
      */
     protected int y = 0;
 
