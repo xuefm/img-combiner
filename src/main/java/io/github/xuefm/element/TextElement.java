@@ -261,7 +261,7 @@ public class TextElement extends Element {
      */
     public TextElement setGradient(Color[] colors, float[] fractions) {
         if (colors.length != fractions.length) {
-            throw new ImageBuildException("Colors[]和float[]长度必须相同");
+            throw new ImageBuildException("colors和fractions长度必须相同");
         }
         this.colors = colors;
         this.fractions = fractions;
