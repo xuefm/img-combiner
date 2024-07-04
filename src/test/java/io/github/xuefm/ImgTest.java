@@ -386,10 +386,8 @@ public class ImgTest {
                 .setColor(Color.decode("#6967bb"))
                 .setUnderline(true)
                 .setLineFeed(LineWrapType.BY_LINE_BREAKS, 2)
-        );
-        imageCombiner.addElement(LineElement.of(0, 0, 0, 200, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER)
-                .setX(-300)
-                .setColor(Color.decode("#6967bb"))
+                .setGradient(new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE},
+                        new float[]{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 1.0f})
         );
 
         imageCombiner.generate();

@@ -61,11 +61,11 @@ public class TextElement extends Element {
     /**
      * 渐变颜色数组 (如:{Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE})
      */
-    Color[] colors;
+    private Color[] colors;
     /**
      * 渐变比率数组  (如:{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 1.0f})
      */
-    float[] fractions;
+    private float[] fractions;
 
     /**
      * 行高(计算值，请勿手动设置)
