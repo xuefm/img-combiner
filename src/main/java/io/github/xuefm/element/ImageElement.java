@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * 图片元素
@@ -44,6 +45,7 @@ public class ImageElement extends Element {
     @Setter
     private Integer roundCorner;
 
+
     /**
      * 构造方法
      *
@@ -62,6 +64,12 @@ public class ImageElement extends Element {
         this.height = height;
         try {
             image = ImageIO.read(new URL(imgUrl));
+            if (Objects.isNull(width)) {
+                this.width = image.getWidth();
+            }
+            if (Objects.isNull(height)) {
+                this.height = image.getHeight();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,33 +84,42 @@ public class ImageElement extends Element {
      * @param transverseAlign 横向对齐方式
      * @param verticalAlign   纵向对齐方式
      */
-    private ImageElement(BufferedImage image, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+    private ImageElement(BufferedImage image, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
         super(x, y, transverseAlign, verticalAlign);
         this.image = image;
-        this.width = image.getWidth();
-        this.height = image.getHeight();
+        this.width = width;
+        this.height = height;
+        if (Objects.isNull(width)) {
+            this.width = image.getWidth();
+        }
+        if (Objects.isNull(height)) {
+            this.height = image.getHeight();
+        }
+
     }
 
     /**
-     * 构造方法
-     *
-     * @param imgUrl          图片地址
-     * @param x               横向偏移
-     * @param y               纵向偏移
+     * @param image  图片
+     * @param x      横向偏移
+     * @param y      纵向偏移
+     * @param width  指定宽度
+     * @param height 指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, Integer x, Integer y, Integer width, Integer height) {
+        return new ImageElement(image, x, y, null, null, width, height);
+    }
+
+    /**
+     * @param image           图片
      * @param transverseAlign 横向对齐方式
      * @param verticalAlign   纵向对齐方式
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
      */
-    private ImageElement(String imgUrl, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        super(x, y, transverseAlign, verticalAlign);
-        this.imgUrl = imgUrl;
-        try {
-            this.image = ImageIO.read(new URL(imgUrl));
-            this.width = image.getWidth();
-            this.height = image.getHeight();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public static ImageElement of(BufferedImage image, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(image, null, null, transverseAlign, verticalAlign, width, height);
     }
 
     /**
@@ -114,7 +131,69 @@ public class ImageElement extends Element {
      * @return ImageElement
      */
     public static ImageElement of(BufferedImage image, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        return new ImageElement(image, x, y, transverseAlign, verticalAlign);
+        return new ImageElement(image, x, y, transverseAlign, verticalAlign, null, null);
+    }
+
+    /**
+     * @param image           图片
+     * @param x               横向偏移
+     * @param y               纵向偏移
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(BufferedImage image, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(image, x, y, transverseAlign, verticalAlign, width, height);
+    }
+
+    /**
+     * @param imgUrl          图片url
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(String imgUrl, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(imgUrl, null, null, transverseAlign, verticalAlign, width, height);
+    }
+
+    /**
+     * @param imgUrl          图片url
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @return ImageElement
+     */
+    public static ImageElement of(String imgUrl, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
+        return new ImageElement(imgUrl, x, y, transverseAlign, verticalAlign, null, null);
+    }
+
+    /**
+     * @param imgUrl 图片url
+     * @param x      横向偏移
+     * @param y      纵向偏移
+     * @param width  指定宽度
+     * @param height 指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(String imgUrl, Integer x, Integer y, Integer width, Integer height) {
+        return new ImageElement(imgUrl, x, y, null, null, width, height);
+    }
+
+    /**
+     * @param imgUrl          图片url
+     * @param x               横向偏移
+     * @param y               纵向偏移
+     * @param transverseAlign 横向对齐方式
+     * @param verticalAlign   纵向对齐方式
+     * @param width           指定宽度
+     * @param height          指定高度
+     * @return ImageElement
+     */
+    public static ImageElement of(String imgUrl, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
+        return new ImageElement(imgUrl, x, y, transverseAlign, verticalAlign, width, height);
     }
 
     /**
@@ -129,18 +208,60 @@ public class ImageElement extends Element {
     }
 
     /**
-     * @param image           图片
-     * @param x               横向偏移
-     * @param y               纵向偏移
-     * @param transverseAlign 横向对齐方式
-     * @param verticalAlign   纵向对齐方式
-     * @param width           指定宽度
-     * @param height          指定高度
+     * 设置横向偏移
+     *
+     * @param x 横向偏移
      * @return ImageElement
      */
-    public static ImageElement of(BufferedImage image, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
-        return new ImageElement(image, x, y, transverseAlign, verticalAlign)
-                .setWidthAndHeight(width, height);
+    public ImageElement setX(int x) {
+        super.x = x;
+        return this;
+    }
+
+    /**
+     * 设置纵向偏移
+     *
+     * @param y 纵向偏移
+     * @return ImageElement
+     */
+    public ImageElement setY(int y) {
+        super.y = y;
+        return this;
+    }
+
+    /**
+     * 设置旋转角度(默认按元素中心旋转)
+     *
+     * @param rotate 旋转角度
+     * @return ImageElement
+     */
+    public ImageElement setRotate(@NonNull Integer rotate) {
+        super.rotate = rotate;
+        return this;
+    }
+
+    /**
+     * 设置实际坐标
+     *
+     * @param actualX 实际x坐标
+     * @param actualY 实际y坐标
+     */
+    public void setActualXAndY(Integer actualX, Integer actualY) {
+        super.actualX = actualX;
+        super.actualY = actualY;
+    }
+
+    /**
+     * 设置宽和高
+     *
+     * @param width  宽度
+     * @param height 高度
+     * @return ImageElement
+     */
+    public ImageElement setWidthAndHeight(int width, int height) {
+        this.width = width;
+        this.height = height;
+        return this;
     }
 
     /**
@@ -177,86 +298,6 @@ public class ImageElement extends Element {
      */
     public ImageElement setVerticalAlign(AlignType.VerticalAlign verticalAlign) {
         super.verticalAlign = verticalAlign;
-        return this;
-    }
-
-    /**
-     * 设置横向偏移
-     *
-     * @param x 横向偏移
-     * @return ImageElement
-     */
-    public ImageElement setX(int x) {
-        super.x = x;
-        return this;
-    }
-
-    /**
-     * @param imgUrl          图片url
-     * @param transverseAlign 横向对齐方式
-     * @param verticalAlign   纵向对齐方式
-     * @return ImageElement
-     */
-    public static ImageElement of(String imgUrl, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign) {
-        return new ImageElement(imgUrl, x, y, transverseAlign, verticalAlign);
-    }
-
-    /**
-     * 设置纵向偏移
-     *
-     * @param y 纵向偏移
-     * @return ImageElement
-     */
-    public ImageElement setY(int y) {
-        super.y = y;
-        return this;
-    }
-
-    /**
-     * @param imgUrl          图片url
-     * @param transverseAlign 横向对齐方式
-     * @param verticalAlign   纵向对齐方式
-     * @param width           指定宽度
-     * @param height          指定高度
-     * @return ImageElement
-     */
-    public static ImageElement of(String imgUrl, Integer x, Integer y, AlignType.TransverseAlign transverseAlign, AlignType.VerticalAlign verticalAlign, Integer width, Integer height) {
-        return new ImageElement(imgUrl, x, y, transverseAlign, verticalAlign)
-                .setWidthAndHeight(width, height);
-    }
-
-    /**
-     * 设置旋转角度(默认按元素中心旋转)
-     *
-     * @param rotate 旋转角度
-     * @return ImageElement
-     */
-    public ImageElement setRotate(@NonNull Integer rotate) {
-        super.rotate = rotate;
-        return this;
-    }
-
-    /**
-     * 设置实际坐标
-     *
-     * @param actualX 实际x坐标
-     * @param actualY 实际y坐标
-     */
-    public void setActualXAndY(Integer actualX, Integer actualY) {
-        super.actualX = actualX;
-        super.actualY = actualY;
-    }
-
-    /**
-     * 设置宽和高
-     *
-     * @param width  宽度
-     * @param height 高度
-     * @return ImageElement
-     */
-    public ImageElement setWidthAndHeight(int width, int height) {
-        this.width = width;
-        this.height = height;
         return this;
     }
 
