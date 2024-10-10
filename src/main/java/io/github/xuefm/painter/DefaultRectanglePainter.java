@@ -24,10 +24,8 @@ public class DefaultRectanglePainter extends AbstractPainter {
         int y = 0;
         switch (element.getTransverseAlign()) {
             case LEFT -> x = element.getX();
-            case CENTER ->
-                    x = element.getX() + (canvasProperty.getCanvasWidth() - ((RectangleElement) element).getWidth()) / 2;
-            case RIGHT ->
-                    x = element.getX() + canvasProperty.getCanvasWidth() - ((RectangleElement) element).getWidth();
+            case CENTER -> x = element.getX() + (canvasProperty.getCanvasWidth() - rectangleElement.getWidth()) / 2;
+            case RIGHT -> x = element.getX() + canvasProperty.getCanvasWidth() - rectangleElement.getWidth();
             default -> throw new ImageBuildException("对齐方式错误");
         }
         switch (element.getVerticalAlign()) {

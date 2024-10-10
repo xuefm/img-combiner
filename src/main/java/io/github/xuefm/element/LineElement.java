@@ -213,7 +213,7 @@ public class LineElement extends Element {
      * @return LineElement
      */
     public static LineElement of(int x1, int y1, int x2, int y2) {
-        return new LineElement(x1, y1, x1, y1, x2, y2, null, null);
+        return new LineElement(null, null, x1, y1, x2, y2, null, null);
     }
 
     /**

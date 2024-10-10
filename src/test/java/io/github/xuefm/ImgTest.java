@@ -395,5 +395,33 @@ public class ImgTest {
 
     }
 
+    @Test
+    public void t2312() throws IOException {
+
+        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
+        imageCombiner.addElement(
+                LineElement.of(300, 100, 100, 300)
+                        .setTransverseAlign(AlignType.TransverseAlign.RIGHT)
+                        .setVerticalAlign(AlignType.VerticalAlign.BOTTOM)
+                        .setColor(Color.RED),
+                LineElement.of(300, 100, 100, 300)
+                        .setX(-100)
+                        .setTransverseAlign(AlignType.TransverseAlign.RIGHT)
+                        .setVerticalAlign(AlignType.VerticalAlign.BOTTOM)
+                        .setColor(Color.BLUE),
+                LineElement.of(300, 100, 100, 300)
+                        .setX(-100).setY(-100)
+                        .setTransverseAlign(AlignType.TransverseAlign.RIGHT)
+                        .setVerticalAlign(AlignType.VerticalAlign.BOTTOM)
+                        .setColor(Color.BLACK)
+
+        );
+
+
+        imageCombiner.generate();
+        imageCombiner.save(generateFilePath + "线测试." + outputFormat.getName());
+
+    }
+
 
 }
