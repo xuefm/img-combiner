@@ -33,10 +33,10 @@ public class DefaultLinePainter extends AbstractPainter {
         switch (element.getTransverseAlign()) {
             case LEFT -> {
                 if (lineElement.getX1() < lineElement.getX2()) {
-                    x2 = x2 - x1;
                     x1 = 0;
+                    x2 = width;
                 } else if (lineElement.getX1() > lineElement.getX2()) {
-                    x1 = x1 - x2;
+                    x1 = width;
                     x2 = 0;
                 } else {
                     x1 = 0;
@@ -45,10 +45,10 @@ public class DefaultLinePainter extends AbstractPainter {
             }
             case CENTER -> {
                 if (lineElement.getX1() < lineElement.getX2()) {
-                    x2 = x2 - x1;
                     x1 = 0;
+                    x2 = width;
                 } else if (lineElement.getX1() > lineElement.getX2()) {
-                    x1 = x1 - x2;
+                    x1 = width;
                     x2 = 0;
                 } else {
                     x1 = 0;
@@ -77,10 +77,10 @@ public class DefaultLinePainter extends AbstractPainter {
         switch (element.getVerticalAlign()) {
             case TOP -> {
                 if (lineElement.getY1() < lineElement.getY2()) {
-                    y2 = y2 - y1;
                     y1 = 0;
+                    y2 = height;
                 } else if (lineElement.getY1() > lineElement.getY2()) {
-                    y1 = y1 - y2;
+                    y1 = height;
                     y2 = 0;
                 } else {
                     y1 = 0;
@@ -89,10 +89,10 @@ public class DefaultLinePainter extends AbstractPainter {
             }
             case CENTER -> {
                 if (lineElement.getY1() < lineElement.getY2()) {
-                    y2 = y2 - y1;
                     y1 = 0;
+                    y2 = height;
                 } else if (lineElement.getY1() > lineElement.getY2()) {
-                    y1 = y1 - y2;
+                    y1 = height;
                     y2 = 0;
                 } else {
                     y1 = 0;
