@@ -24,12 +24,12 @@ public class DefaultLinePainter extends AbstractPainter {
         }
         int width = Math.abs(lineElement.getX2() - lineElement.getX1());
         int height = Math.abs(lineElement.getY2() - lineElement.getY1());
-        int x1 = lineElement.getX1();
-        int y1 = lineElement.getY1();
-        int x2 = lineElement.getX2();
-        int y2 = lineElement.getY2();
+        int x1;
+        int y1;
+        int x2;
+        int y2;
 
-
+        //处理横向对齐方式
         switch (element.getTransverseAlign()) {
             case LEFT -> {
                 if (lineElement.getX1() < lineElement.getX2()) {
@@ -72,8 +72,7 @@ public class DefaultLinePainter extends AbstractPainter {
 
             default -> throw new ImageBuildException("对齐方式错误");
         }
-        x1 += element.getX();
-        x2 += element.getX();
+        //处理纵向对齐方式
         switch (element.getVerticalAlign()) {
             case TOP -> {
                 if (lineElement.getY1() < lineElement.getY2()) {
@@ -115,6 +114,9 @@ public class DefaultLinePainter extends AbstractPainter {
             }
             default -> throw new ImageBuildException("对齐方式错误");
         }
+        //处理偏移
+        x1 += element.getX();
+        x2 += element.getX();
         y1 += element.getY();
         y2 += element.getY();
         lineElement.setCalculatedValue(x1, y1, x2, y2, width, height);
