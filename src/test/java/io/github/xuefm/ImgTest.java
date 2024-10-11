@@ -12,7 +12,6 @@ import org.junit.Test;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalTime;
 
 public class ImgTest {
 
@@ -304,74 +303,6 @@ public class ImgTest {
         );
         imageCombiner.generate();
         imageCombiner.save(generateFilePath + "混合01." + outputFormat.getName());
-    }
-
-    @Test
-    public void clockTest() throws IOException {
-        ImageCombiner imageCombiner = DefaultImageCombiner.of(400, 700, outputFormat, 0, 0f);
-        imageCombiner.addElement(
-                TextElement.of("你好啊", null, 100, AlignType.TransverseAlign.CENTER, null)
-                        .setColor(new Color(0, 255, 255))
-                        .setFont(new Font("宋体", Font.PLAIN, 72))
-                        .setAlpha(0.35f)
-        );
-        //表盘
-        imageCombiner.addElement(
-                RectangleElement.of(null, null, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER, 200, 200)
-                        .setColor(new Color(30, 31, 34))
-                        .setRoundCorner(200)
-        );
-        //时间刻度
-        for (int i = 0; i < 12; i++) {
-            imageCombiner.addElement(
-                    LineElement.of(200, 251, 200, (i % 3 == 0 ? 270 : 260))
-                            .setColor(Color.WHITE)
-                            .setRotate(30 * i, 200, 350)
-            );
-        }
-        //时针、分针、秒针
-        LocalTime localTime = LocalTime.now();
-        int hour = localTime.getHour();
-        int minute = localTime.getMinute();
-        int second = localTime.getSecond();
-        double hourAngle = (hour % 12 + minute / 60.0 + second / 3600.0) * 30;
-        double minuteAngle = (minute + second / 60.0) * 6;
-        double secondAngle = second * 6;
-        imageCombiner.addElement(
-                LineElement.of(200, 330, 200, 350)
-                        .setColor(Color.WHITE)
-                        .setRotate((int) hourAngle, 200, 350)
-        );
-        imageCombiner.addElement(
-                LineElement.of(200, 310, 200, 350)
-                        .setColor(Color.WHITE)
-                        .setRotate((int) minuteAngle, 200, 350)
-        );
-        imageCombiner.addElement(
-                LineElement.of(200, 300, 200, 350)
-                        .setColor(Color.RED)
-                        .setRotate((int) secondAngle, 200, 350)
-        );
-        imageCombiner.addElement(
-                TextElement.of("你好啊", null, 600, AlignType.TransverseAlign.CENTER, null)
-                        .setColor(new Color(255, 0, 255))
-                        .setFont(new Font("宋体", Font.PLAIN, 72))
-                        .setAlpha(0.35f)
-        );
-
-        imageCombiner.addElement(
-                LineElement.of(200, 500, 200, 600)
-                        .setColor(Color.RED)
-        );
-        imageCombiner.addElement(
-                LineElement.of(200, 500, 200, 600)
-                        .setColor(Color.RED)
-                        .setRotate(90)
-        );
-
-        imageCombiner.generate();
-        imageCombiner.save(generateFilePath + "时钟02." + outputFormat.getName());
-
     }
 
     @Test
