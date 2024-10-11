@@ -204,7 +204,6 @@ public class LineElement extends Element {
 
 
     /**
-     * (使用此方法构建对象请勿再指定对其方式)
      *
      * @param x1 起始x坐标
      * @param y1 起始y坐标
