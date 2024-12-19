@@ -45,6 +45,11 @@ public class TextElement extends Element {
      */
     private int lineMax;
 
+    /**
+     * 行间距(自动换行,默认0)
+     */
+    private int lineSpacing;
+
 
     /**
      * 是否使用下划线(默认不使用)
@@ -237,6 +242,21 @@ public class TextElement extends Element {
     public TextElement setLineFeed(LineWrapType lineWrapType, int lineMax) {
         this.lineWrapType = lineWrapType;
         this.lineMax = lineMax;
+        return this;
+    }
+
+    /**
+     * 设置自动换行
+     *
+     * @param lineWrapType 自动换行类型
+     * @param lineMax      每行最多容纳多少
+     * @param lineSpacing  行间距
+     * @return TextElement
+     */
+    public TextElement setLineFeed(LineWrapType lineWrapType, int lineMax, int lineSpacing) {
+        this.lineWrapType = lineWrapType;
+        this.lineMax = lineMax;
+        this.lineSpacing = lineSpacing;
         return this;
     }
 

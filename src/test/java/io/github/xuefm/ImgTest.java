@@ -313,10 +313,10 @@ public class ImgTest {
                 举头望明月，低头思故乡。
                 """;
         ImageCombiner imageCombiner = DefaultImageCombiner.of(800, 700, outputFormat, 0, 0f);
-        imageCombiner.addElement(TextElement.of(text, -100, -100, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER)
+        imageCombiner.addElement(TextElement.of(text, 0, 0, AlignType.TransverseAlign.CENTER, AlignType.VerticalAlign.CENTER)
                 .setColor(Color.decode("#6967bb"))
                 .setUnderline(true)
-                .setLineFeed(LineWrapType.BY_LINE_BREAKS, 2)
+                .setLineFeed(LineWrapType.BY_LINE_BREAKS, 0, 50)
                 .setGradient(new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE, Color.RED, Color.GREEN, Color.BLUE},
                         new float[]{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 1.0f})
         );

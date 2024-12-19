@@ -119,7 +119,8 @@ public class DefaultITextPainter extends AbstractPainter {
         textElement.setAttributedStringList(attributedStringList);
         //计算文本所占宽高
         int width = 0; //宽(文本宽,文本最大宽)
-        int height = textHeight * textList.size(); //高(文本所占高,单行高度*行数)
+        //高(文本所占高,单行高度*行数 + 行间距*(行数-1))
+        int height = textHeight * textList.size() + textElement.getLineSpacing() * (textList.size() - 1);
         for (String s : textList) {
             int i = fontMetrics.stringWidth(s);
             if (i > width) {
@@ -179,6 +180,7 @@ public class DefaultITextPainter extends AbstractPainter {
         for (AttributedString attributedString : textElement.getAttributedStringList()) {
             y += textElement.getTextHeight();
             g2d.drawString(attributedString.getIterator(), textElement.getActualX(), y);
+            y += textElement.getLineSpacing();
         }
 
     }
